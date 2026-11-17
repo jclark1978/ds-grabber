@@ -1,0 +1,50 @@
+name: Grab datasheets
+
+on:
+  schedule:
+    - cron: "17 11 * * 1"   # Mondays ~6:17 AM ET
+  workflow_dispatch:
+    inputs:
+      match:
+        description: "Title filter (regex)"
+        default: "FortiGate"
+      force:
+        description: "Re-download everything"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  grab:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: |
+          pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+
+      - name: Run ds-grabber
+        run: |
+          ARGS="--match '${{ github.event.inputs.match || 'FortiGate' }}'"
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then ARGS="$ARGS --force"; fi
+          eval python ds_grabber.py $ARGS
+
+      - name: Commit changes
+        run: |
+          git config user.name "ds-grabber"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A datasheets manifest.json
+          if git diff --cached --quiet; then
+            echo "No datasheet changes."
+          else
+            git commit -m "Datasheets update $(date -u +%Y-%m-%d)"
+            git push
+          fi
