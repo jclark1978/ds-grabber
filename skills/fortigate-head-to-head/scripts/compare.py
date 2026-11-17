@@ -72,6 +72,9 @@ def resolve(name: str, index: dict) -> list[dict]:
         return exact
     code, fam = norm(name), family_hint(name)
     hits = [m for m in index["models"] if code in m["codes"]]
+    if not hits and re.fullmatch(r"VM-?(\d+|UL)", code):  # VM04 -> VM04S
+        vm = code.replace("-", "") + "S"
+        hits = [m for m in index["models"] if vm in m["codes"]]
     if fam:
         hits = [m for m in hits if m["family"] == fam]
     elif len(hits) > 1:  # plain "70G" means FortiGate unless the user said otherwise

@@ -102,6 +102,11 @@ function resolve(query, index) {
   if (exact.length) return exact;
   var code = norm(query), fam = familyHint(query);
   var hits = index.filter(function (m) { return (m.codes || []).indexOf(code) >= 0; });
+  // "VM04", "VM-04", "FG-VM04" -> VM04S (the datasheet lists the S-series sizes).
+  if (!hits.length && /^VM-?(\d+|UL)$/.test(code)) {
+    var vm = code.replace('-', '') + 'S';
+    hits = index.filter(function (m) { return (m.codes || []).indexOf(vm) >= 0; });
+  }
   if (fam) hits = hits.filter(function (m) { return m.family === fam; });
   else if (hits.length > 1) {
     var fg = hits.filter(function (m) { return m.family === 'FortiGate'; });
