@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FortiGate Head-to-Head</title>
 <!--
-  FORTIGATE HEAD-TO-HEAD TEMPLATE v1.0
+  FORTIGATE HEAD-TO-HEAD TEMPLATE v1.1 (FortiGate only, or FortiGate vs Palo Alto / Cisco FTD / Meraki MX)
   DO NOT EDIT ANYTHING IN THIS FILE EXCEPT THE JSON INSIDE <script id="compare-data">.
   The page renders entirely from that JSON. Same layout every run.
 -->
@@ -73,6 +73,21 @@ ul.tight li{margin-bottom:4px}
 .muted{color:var(--dark);font-size:13px}
 .foot{margin-top:40px;border-top:4px solid var(--red);padding-top:8px;font-size:12px;color:var(--med)}
 
+/* Cross-vendor */
+.mcard.comp{border-left-color:var(--xdark)}
+.vend{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+.mcard.comp .vend{color:var(--dark)}
+.metric{font-size:11px;color:var(--med);line-height:1.3;margin-top:2px;font-weight:400}
+.qtag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:0 5px;border-radius:3px;background:var(--red-t);color:var(--red);margin-left:4px;vertical-align:1px}
+td.v.best .metric{font-weight:400}
+/* Competitor columns: light cool tint so FortiGate columns stand apart */
+th.cv{background:#E3E8EF}
+td.cv{background:#F4F6F9}
+th .thv{display:block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+th.cv .thv{color:var(--dark)}
+@media print{th.cv,td.cv{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+table.mt td,table.mt th{font-size:13px}
+.all td{font-size:12px;padding:5px 10px}
 @media print{
   .tbtns{display:none}
   .page{padding:0;max-width:none}
@@ -169,6 +184,7 @@ ul.tight li{margin-bottom:4px}
 
   function load(){
     var cfg = JSON.parse(document.getElementById('compare-data').textContent||'{}');
+    if(cfg.cross) return Promise.resolve({cross:cfg.cross, live:false});
     if(cfg.records && cfg.records.length) return Promise.resolve({models:cfg.records, live:false});
     var q = new URLSearchParams(location.search).get('models');
     var ids = q ? q.split(',').map(function(s){return s.trim();}).filter(Boolean) : (cfg.models||[]);
@@ -250,6 +266,7 @@ ul.tight li{margin-bottom:4px}
   function countRows(h){ return (h.match(/<tr>/g)||[]).length; }
 
   function render(res){
+    if(res.cross) return renderCross(res.cross);
     var models=res.models;
     var names=models.map(function(m){return m.model;});
     var shortNames=models.map(short);
@@ -288,11 +305,110 @@ ul.tight li{margin-bottom:4px}
 
     document.getElementById('main').innerHTML=h;
     var now=new Date();
-    document.getElementById('foot').textContent='FortiGate Head-to-Head · Template v1.0 · '+(res.live?'Data loaded live from ds-grabber':'Embedded data snapshot')+' · Generated '+now.toISOString().slice(0,16).replace('T',' ');
+    document.getElementById('foot').textContent='FortiGate Head-to-Head · Template v1.1 · '+(res.live?'Data loaded live from ds-grabber':'Embedded data snapshot')+' · Generated '+now.toISOString().slice(0,16).replace('T',' ');
     window.__models=models;
   }
 
+
+  /* ---------- Cross-vendor report (v1.1) ---------- */
+  function renderCross(c){
+    var cols=c.columns, n=cols.length;
+    var names=cols.map(function(m){return m.model;});
+    document.title=names.join(' vs ')+' | FortiGate Competitive Head-to-Head';
+    document.querySelector('.eyebrow').textContent='FortiGate Competitive Head-to-Head';
+    document.getElementById('title').textContent=names.join(' vs ');
+    document.getElementById('subtitle').textContent='Specifications from each vendor\'s own datasheet. Vendors test differently, so figures are not like-for-like: every value shows the vendor\'s metric name, and test conditions are listed below. All performance values are "up to".';
+
+    var h='<div class="toolbar"><h2>Side-by-Side</h2><span class="tbtns">'+
+      '<button class="tbtn" data-x="open">Expand all</button><button class="tbtn" data-x="close">Collapse all</button>'+
+      '<button class="tbtn" data-x="csv">Export CSV</button><button class="tbtn" data-x="print">Print / Save PDF</button></span></div>';
+
+    h+='<div class="models" style="grid-template-columns:repeat('+n+',1fr)">'+cols.map(function(m){
+      var url=m.source.spec_url||m.source.url;
+      return '<div class="mcard'+(m.line==='fortinet'?'':' comp')+'"><div class="vend">'+esc(m.line_label)+'</div><div class="mn">'+esc(m.model)+'</div>'+
+        '<div class="mmeta">'+(m.form_factor==='vm'||m.form_factor==='virtual'?'Virtual appliance':'Hardware appliance')+(m.series?' · '+esc(m.series):'')+'</div>'+
+        '<div class="muted">'+esc(m.software)+'</div>'+
+        (url?'<a class="ext" href="'+esc(url)+'" target="_blank" rel="noopener">Datasheet spec page</a>':'')+
+        (m.source.library_last_updated?'<div class="muted">Datasheet date '+esc(m.source.library_last_updated)+'</div>':'')+'</div>';
+    }).join('')+'</div>';
+
+    if(c.match){
+      var mm=c.match, a=mm.anchor;
+      var mh='<p class="label">How the comparable models were chosen</p><div class="muted" style="margin-bottom:8px">'+
+        (a?'Closest '+esc(a.basis)+' to '+esc(mm.source_model)+' ('+esc(a.value)+', '+esc(a.metric)+').':'')+
+        ' Hardware is matched only to hardware and virtual only to virtual. Pick a different size if the customer\'s numbers point elsewhere.</div>';
+      if(mm.results.length){
+        mh+='<div class="tw"><table class="mt"><thead><tr><th>Vendor</th><th>Closest model</th><th>Figure</th><th>Difference</th><th>Next size the other way</th></tr></thead><tbody>'+
+          mm.results.map(function(r){
+            var b=r.best, al=r.alternative;
+            return '<tr><td class="spec">'+esc(r.vendor_label)+'</td><td>'+esc(b.model)+(r.also_same_value&&r.also_same_value.length?'<div class="metric">Same figure: '+esc(r.also_same_value.join(', '))+'</div>':'')+(r.note?'<div class="metric">'+esc(r.note)+'</div>':'')+'</td>'+
+              '<td class="v">'+esc(b.anchor)+'</td><td>'+pctBadge(b.diff_pct)+'</td><td>'+(al?esc(al.model)+' ('+esc(al.anchor)+', '+pctText(al.diff_pct)+')':'None')+'</td></tr>';
+          }).join('')+'</tbody></table></div>';
+      }
+      if(mm.skipped&&mm.skipped.length) mh+='<ul class="tight">'+mm.skipped.map(function(s){return '<li><b>'+esc(s.vendor_label)+':</b> no match, '+esc(s.reason)+'.</li>';}).join('')+'</ul>';
+      h+='<div class="note">'+mh+'</div>';
+    }
+
+    h+='<div class="note"><b>How to read this.</b> Each cell shows the value and, under it, the metric name the vendor uses. '+
+      '<span class="qtag">Loose</span> marks a different test method and <span class="qtag">Nearest</span> marks a row where the vendor publishes no equivalent, so the closest figure is shown. '+
+      'Bold marks the best value, only on rows where every vendor\'s metric is a close match. "Not published" means the vendor\'s datasheet does not list it.</div>';
+
+    function cv(i){ return cols[i].line==='fortinet'?'':' cv'; }
+    function xhead(){ return colgroup(n,false)+'<thead><tr><th>Specification</th>'+cols.map(function(m,i){return '<th class="'+cv(i).trim()+'"><span class="thv">'+esc(m.vendor)+'</span>'+esc(m.model)+'</th>';}).join('')+'</tr></thead>'; }
+    function xrows(sec){
+      return c.rows.filter(function(r){return r.section===sec;}).map(function(r){
+        return '<tr><td class="spec">'+esc(r.label)+'</td>'+r.cells.map(function(x,i){
+          if(x.missing) return '<td class="miss'+cv(i)+'">'+esc(x.text)+'</td>';
+          var tag=x.quality==='loose'?'<span class="qtag">Loose</span>':(x.quality==='nearest'?'<span class="qtag">Nearest</span>':'');
+          var tip=[x.metric,x.software,x.test].filter(Boolean).join(' | ');
+          return '<td class="v'+cv(i)+(x.best?' best':'')+'"'+(tip?' title="'+esc(tip)+'"':'')+'>'+esc(x.text)+tag+(x.metric?'<div class="metric">'+esc(x.metric)+'</div>':'')+'</td>';
+        }).join('')+'</tr>';
+      }).join('');
+    }
+    ['Performance and Capacity','Hardware'].forEach(function(sec){
+      var r=xrows(sec); if(!r) return;
+      h+='<details class="sec" open><summary>'+esc(sec)+' <span class="sc">('+countRows(r)+')</span></summary><div class="tw"><table>'+xhead()+'<tbody>'+r+'</tbody></table></div></details>';
+    });
+
+    if(c.caveats&&c.caveats.length) h+='<details class="sec" open><summary>Comparison Notes <span class="sc">('+c.caveats.length+')</span></summary><ul class="tight">'+
+      c.caveats.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul></details>';
+
+    h+='<details class="sec"><summary>All Published Specifications <span class="sc">(per model)</span></summary>'+cols.map(function(m){
+      return '<p class="label" style="margin-top:12px">'+esc(m.model)+'</p><div class="tw"><table class="all"><colgroup><col style="width:40%"><col style="width:60%"></colgroup><tbody>'+
+        m.all_specs.map(function(s){return '<tr><td class="spec">'+esc(s.label)+'</td><td class="v">'+esc(s.raw)+'</td></tr>';}).join('')+'</tbody></table></div>';
+    }).join('')+'</details>';
+
+    var notes='';
+    cols.forEach(function(m){
+      var tests=[];
+      if(m.line==='fortinet'){
+        var fn=m.footnotes||{};
+        if(fn.note) tests.push(fn.note);
+        Object.keys(fn).forEach(function(k){ if(k!=='note') tests.push(fn[k]); });
+      } else m.all_specs.forEach(function(s){ if(s.test&&tests.indexOf(s.test)<0) tests.push(s.test); });
+      notes+='<p class="label" style="margin-top:12px">'+esc(m.model)+'</p>'+
+        '<div class="muted"><a class="ext" href="'+esc(m.source.spec_url||m.source.url)+'" target="_blank" rel="noopener">'+esc(m.source.title)+'</a> · '+esc(m.software)+'</div>'+
+        (tests.length?'<ul class="tight">'+tests.map(function(t){return '<li>'+esc(t)+'</li>';}).join('')+'</ul>':'<div class="muted">No test conditions printed with these values.</div>');
+    });
+    h+='<details class="sec" open><summary>Test Conditions and Sources</summary>'+notes+'</details>';
+
+    document.getElementById('main').innerHTML=h;
+    document.getElementById('foot').textContent='FortiGate Competitive Head-to-Head · Template v1.1 · Embedded data snapshot from ds-grabber, palo-ds-grabber and cisco-ds-grabber · Generated '+new Date().toISOString().slice(0,16).replace('T',' ');
+    window.__cross=c;
+  }
+  function pctText(p){ return p==null?'':(p>0?'+':'')+p+'%'; }
+  function pctBadge(p){ if(p==null) return ''; if(p===0) return '<span class="badge b-eq">Same</span>'; return '<span class="badge b-eq">'+pctText(p)+'</span>'; }
+  function exportCrossCsv(){
+    var c=window.__cross, rows=[['Specification'].concat(c.columns.map(function(m){return m.model;}))];
+    c.rows.forEach(function(r){ rows.push([r.label].concat(r.cells.map(function(x){return x.missing?x.text:x.text+(x.metric?' ('+x.metric+')':'');}))); });
+    rows.push(['Software'].concat(c.columns.map(function(m){return m.software;})));
+    rows.push(['Datasheet'].concat(c.columns.map(function(m){return m.source.spec_url||m.source.url;})));
+    var csv=rows.map(function(r){return r.map(function(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+    var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='fortigate-competitive-head-to-head.csv'; a.click();
+  }
+
   function exportCsv(){
+    if(window.__cross) return exportCrossCsv();
     var models=window.__models||[], rows=[['Specification'].concat(models.map(function(m){return m.model;}))];
     SECTIONS.forEach(function(s){ s[1].forEach(function(r){
       if(!models.some(function(m){return (m.specs||{})[r[0]];})) return;
