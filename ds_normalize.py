@@ -364,6 +364,8 @@ def write_outputs(models: dict, unmapped: dict, report: list[str], out_root: Pat
     if not path.exists() or path.read_text() != new:  # only touch on real change
         path.write_text(new)
 
+    write_split(recs, data)
+
     with open(data / "models.csv", "w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["model_id", "model", "form_factor", "rack_units", "power_max_w"] + CSV_FIELDS + ["source_url"])
@@ -378,6 +380,63 @@ def write_outputs(models: dict, unmapped: dict, report: list[str], out_root: Pat
         lines.append(f"{len(files):3}  {label}    [{', '.join(sorted(files)[:3])}{', ...' if len(files) > 3 else ''}]")
     (reports / "unmapped_labels.txt").write_text("\n".join(lines) + "\n")
     (reports / "extraction.txt").write_text("\n".join(report) + "\n")
+
+
+def model_slug(model_id: str) -> str:
+    return re.sub(r"[^A-Za-z0-9._-]+", "_", model_id).strip("_")
+
+
+def model_codes(rec: dict) -> list[str]:
+    """Bare model codes a user might type, e.g. ['90G'], ['50G', '51G'],
+    ['1800F', '1800F-DC'], ['VM04S', 'VM-04S']. Match after stripping
+    'FortiGate'/'FortiWiFi'/'FG-'/'FWF-'/'FGR-' and spaces from user input."""
+    prefix, _, code = rec["model_id"].partition("-")
+    parts = [p.strip() for p in re.split(r"\s*/\s*", code) if p.strip()]
+    base = parts[0] if parts else code
+    out = []
+    for p in parts or [code]:
+        full = base + p if p.startswith("-") else p
+        full = re.sub(r"^(FG|FWF|FGR)-", "", full)
+        out.append(full.upper())
+    if prefix == "FG" and code.startswith("VM"):
+        out.append(code.replace("VM", "VM-", 1))
+    return sorted(set(out), key=out.index)
+
+
+def write_split(recs: list[dict], data: Path) -> None:
+    """Small per-model files + an index, so an agent can fetch only what it needs."""
+    mdir = data / "models"
+    mdir.mkdir(exist_ok=True)
+    keep = set()
+    index = []
+    for r in recs:
+        slug = model_slug(r["model_id"])
+        keep.add(f"{slug}.json")
+        body = json.dumps(r, indent=2, ensure_ascii=False) + "\n"
+        f = mdir / f"{slug}.json"
+        if not f.exists() or f.read_text() != body:
+            f.write_text(body)
+        index.append({
+            "model_id": r["model_id"],
+            "model": r["model"],
+            "form_factor": r["form_factor"],
+            "file": f"data/models/{slug}.json",
+            "family": {"FG": "FortiGate", "FWF": "FortiWiFi", "FGR": "FortiGate Rugged"}.get(
+                r["model_id"].split("-")[0], "FortiGate"),
+            "codes": model_codes(r),
+            "spec_url": r["source"]["spec_url"],
+        })
+    for f in mdir.glob("*.json"):
+        if f.name not in keep:
+            f.unlink()
+    body = json.dumps({"schema_version": SCHEMA_VERSION, "count": len(index),
+                       "match_rule": "Strip 'FortiGate', 'FortiWiFi', 'Rugged', 'FGT', 'FG', 'FWF', 'FGR', "
+                                     "spaces and leading dashes from the user's text, uppercase it, then "
+                                     "compare to 'codes'. Use 'family' to tell FortiGate from FortiWiFi.",
+                       "models": index}, indent=1, ensure_ascii=False) + "\n"
+    f = data / "index.json"
+    if not f.exists() or f.read_text() != body:
+        f.write_text(body)
 
 
 def natural_key(s: str):

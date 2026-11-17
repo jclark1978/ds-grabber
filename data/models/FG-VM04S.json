@@ -1,0 +1,68 @@
+{
+  "model": "FortiGate VM-04S",
+  "model_id": "FG-VM04S",
+  "form_factor": "vm",
+  "source": {
+    "title": "FortiGate Virtual Appliances Data Sheet",
+    "url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-vm.pdf",
+    "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-vm.pdf#page=7",
+    "file": "fortigate-vm.pdf",
+    "library_last_updated": "2025-05-29",
+    "sha256": "32c5b3ba91304ea80b281d3997c96be508eedc4d3df983d2c5f33adac99b57b2"
+  },
+  "specs": {
+    "firewall_policies": {
+      "value": 10000,
+      "raw": "10 000",
+      "label": "Firewall Policies"
+    },
+    "vdoms_default": {
+      "value": 2,
+      "raw": "2 / 50",
+      "label": "Virtual Domains (Default / Maximum)",
+      "notes": [
+        "*"
+      ]
+    },
+    "vdoms_max": {
+      "value": 50,
+      "raw": "2 / 50",
+      "label": "Virtual Domains (Default / Maximum)",
+      "notes": [
+        "*"
+      ]
+    },
+    "max_fortiaps_tunnel": {
+      "value": 512,
+      "raw": "512 / 1024",
+      "label": "Maximum Number of Wireless Access Points Controlled (Tunnel / Global)"
+    },
+    "max_fortiaps_total": {
+      "value": 1024,
+      "raw": "512 / 1024",
+      "label": "Maximum Number of Wireless Access Points Controlled (Tunnel / Global)"
+    },
+    "max_fortiswitches": {
+      "value": 64,
+      "raw": "64",
+      "label": "Maximum Number of FortiSwitches"
+    },
+    "max_registered_endpoints": {
+      "value": 8000,
+      "raw": "8000",
+      "label": "Maximum Number of Registered Endpoints"
+    }
+  },
+  "hardware": null,
+  "vm": {
+    "vcpu_min": 1,
+    "vcpu_max": 4,
+    "vm_storage": "32 GB / 2 TB",
+    "unlimited_users": true
+  },
+  "footnotes": {
+    "note": "All performance values are “up to” and vary depending on system configuration. Network Interface Support The maximum number of network interfaces consumable by a FortiGate instance is 24 starting with FortiGate version 6.4.0. Prior versions allow 18. The minimum number is 1. The actual number of network interfaces attachable to instances varies depending on cloud platforms and instance types, and they may not allow you to attach the greater number of interfaces to an instance than their maximum limits even while FortiGate allows up to 24.",
+    "*": "FG-VM S-Series does not come with a multi-VDOM feature by default. You can add it by applying separate subscription VDOM licenses. See ORDERING INFORMATION for VDOM SKUs. VENDOR Private Clouds (Hypervisors) VMware ESXi v6.7 / v7.0 / v8.0 VMware NSX-T* v3.2 / v4.0 Microsoft Hyper-V Server 2008 R2 / 2012 / 2012 R2 / 2016 / 2019** Microsoft AzureStack Red Hat OpenShift Virtualization 4.17.13*** Citrix Xen XenServer v5.6 sp2, v6.0, v6.2 and later Open source Xen v3.4.3, v4.1 and later KVM qemu 0.12.1 & libvirt 0.10.2 and later for Red Hat Enterprise Linux / CentOS 6.4 and later / Ubuntu 16.04 LTS (generic kernel) KVM qemu 2.3.1 for SuSE Linux Enterprise Server 12 SP1 LTSS Nutanix AHV 7.3**** CSP 5000 Series***** See the NSX-T on VMware Compatibility Guide for the latest supported platforms"
+  },
+  "other": {}
+}

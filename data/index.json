@@ -1,0 +1,1168 @@
+{
+ "schema_version": "1.0",
+ "count": 103,
+ "match_rule": "Strip 'FortiGate', 'FortiWiFi', 'Rugged', 'FGT', 'FG', 'FWF', 'FGR', spaces and leading dashes from the user's text, uppercase it, then compare to 'codes'. Use 'family' to tell FortiGate from FortiWiFi.",
+ "models": [
+  {
+   "model_id": "FG-30G",
+   "model": "FortiGate 30G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-30G.json",
+   "family": "FortiGate",
+   "codes": [
+    "30G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-30g-series.pdf#page=9"
+  },
+  {
+   "model_id": "FG-31G",
+   "model": "FortiGate 31G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-31G.json",
+   "family": "FortiGate",
+   "codes": [
+    "31G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-30g-series.pdf#page=9"
+  },
+  {
+   "model_id": "FG-40F",
+   "model": "FortiGate 40F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-40F.json",
+   "family": "FortiGate",
+   "codes": [
+    "40F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-40f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-40F-3G4G",
+   "model": "FortiGate 40F-3G4G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-40F-3G4G.json",
+   "family": "FortiGate",
+   "codes": [
+    "40F-3G4G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-40f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-50G-5G/51G-5G",
+   "model": "FortiGate 50G-5G/51G-5G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-50G-5G_51G-5G.json",
+   "family": "FortiGate",
+   "codes": [
+    "50G-5G",
+    "51G-5G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-50g-series.pdf#page=12"
+  },
+  {
+   "model_id": "FG-50G-DSL",
+   "model": "FortiGate 50G-DSL",
+   "form_factor": "appliance",
+   "file": "data/models/FG-50G-DSL.json",
+   "family": "FortiGate",
+   "codes": [
+    "50G-DSL"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-50g-series.pdf#page=12"
+  },
+  {
+   "model_id": "FG-50G-SFP",
+   "model": "FortiGate 50G-SFP",
+   "form_factor": "appliance",
+   "file": "data/models/FG-50G-SFP.json",
+   "family": "FortiGate",
+   "codes": [
+    "50G-SFP"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-50g-series.pdf#page=12"
+  },
+  {
+   "model_id": "FG-50G-SFP-POE/FG-51G-SFP-POE",
+   "model": "FortiGate 50G-SFP-POE/FG-51G-SFP-POE",
+   "form_factor": "appliance",
+   "file": "data/models/FG-50G-SFP-POE_FG-51G-SFP-POE.json",
+   "family": "FortiGate",
+   "codes": [
+    "50G-SFP-POE",
+    "51G-SFP-POE"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-50g-series.pdf#page=12"
+  },
+  {
+   "model_id": "FG-50G/51G",
+   "model": "FortiGate 50G/51G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-50G_51G.json",
+   "family": "FortiGate",
+   "codes": [
+    "50G",
+    "51G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-50g-series.pdf#page=12"
+  },
+  {
+   "model_id": "FG-60F",
+   "model": "FortiGate 60F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-60F.json",
+   "family": "FortiGate",
+   "codes": [
+    "60F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-60f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-61F",
+   "model": "FortiGate 61F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-61F.json",
+   "family": "FortiGate",
+   "codes": [
+    "61F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-60f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-70G",
+   "model": "FortiGate 70G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-70G.json",
+   "family": "FortiGate",
+   "codes": [
+    "70G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-70g-series.pdf#page=10"
+  },
+  {
+   "model_id": "FG-70G-POE",
+   "model": "FortiGate 70G-POE",
+   "form_factor": "appliance",
+   "file": "data/models/FG-70G-POE.json",
+   "family": "FortiGate",
+   "codes": [
+    "70G-POE"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-70g-series.pdf#page=10"
+  },
+  {
+   "model_id": "FG-71F",
+   "model": "FortiGate 71F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-71F.json",
+   "family": "FortiGate",
+   "codes": [
+    "71F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-70f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-71G",
+   "model": "FortiGate 71G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-71G.json",
+   "family": "FortiGate",
+   "codes": [
+    "71G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-70g-series.pdf#page=10"
+  },
+  {
+   "model_id": "FG-71G-POE",
+   "model": "FortiGate 71G-POE",
+   "form_factor": "appliance",
+   "file": "data/models/FG-71G-POE.json",
+   "family": "FortiGate",
+   "codes": [
+    "71G-POE"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-70g-series.pdf#page=10"
+  },
+  {
+   "model_id": "FG-80E-POE",
+   "model": "FortiGate 80E-POE",
+   "form_factor": "appliance",
+   "file": "data/models/FG-80E-POE.json",
+   "family": "FortiGate",
+   "codes": [
+    "80E-POE"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_80E_Series.pdf#page=5"
+  },
+  {
+   "model_id": "FG-80F",
+   "model": "FortiGate 80F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-80F.json",
+   "family": "FortiGate",
+   "codes": [
+    "80F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-80f-series.pdf#page=9"
+  },
+  {
+   "model_id": "FG-80F-DSL",
+   "model": "FortiGate 80F-DSL",
+   "form_factor": "appliance",
+   "file": "data/models/FG-80F-DSL.json",
+   "family": "FortiGate",
+   "codes": [
+    "80F-DSL"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-80f-series.pdf#page=9"
+  },
+  {
+   "model_id": "FG-80F-POE",
+   "model": "FortiGate 80F-POE",
+   "form_factor": "appliance",
+   "file": "data/models/FG-80F-POE.json",
+   "family": "FortiGate",
+   "codes": [
+    "80F-POE"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-80f-series.pdf#page=9"
+  },
+  {
+   "model_id": "FG-81E-POE",
+   "model": "FortiGate 81E-POE",
+   "form_factor": "appliance",
+   "file": "data/models/FG-81E-POE.json",
+   "family": "FortiGate",
+   "codes": [
+    "81E-POE"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_80E_Series.pdf#page=5"
+  },
+  {
+   "model_id": "FG-81F",
+   "model": "FortiGate 81F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-81F.json",
+   "family": "FortiGate",
+   "codes": [
+    "81F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-80f-series.pdf#page=9"
+  },
+  {
+   "model_id": "FG-81F-POE",
+   "model": "FortiGate 81F-POE",
+   "form_factor": "appliance",
+   "file": "data/models/FG-81F-POE.json",
+   "family": "FortiGate",
+   "codes": [
+    "81F-POE"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-80f-series.pdf#page=9"
+  },
+  {
+   "model_id": "FG-90G",
+   "model": "FortiGate 90G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-90G.json",
+   "family": "FortiGate",
+   "codes": [
+    "90G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-90g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-91G",
+   "model": "FortiGate 91G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-91G.json",
+   "family": "FortiGate",
+   "codes": [
+    "91G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-90g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-120G",
+   "model": "FortiGate 120G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-120G.json",
+   "family": "FortiGate",
+   "codes": [
+    "120G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-120g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-121G",
+   "model": "FortiGate 121G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-121G.json",
+   "family": "FortiGate",
+   "codes": [
+    "121G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-120g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-200G",
+   "model": "FortiGate 200G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-200G.json",
+   "family": "FortiGate",
+   "codes": [
+    "200G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-200g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-201G",
+   "model": "FortiGate 201G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-201G.json",
+   "family": "FortiGate",
+   "codes": [
+    "201G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-200g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-400F/-DC",
+   "model": "FortiGate 400F/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-400F_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "400F",
+    "400F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-400f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-400G",
+   "model": "FortiGate 400G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-400G.json",
+   "family": "FortiGate",
+   "codes": [
+    "400G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-400g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-401F/-DC",
+   "model": "FortiGate 401F/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-401F_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "401F",
+    "401F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-400f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-401G",
+   "model": "FortiGate 401G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-401G.json",
+   "family": "FortiGate",
+   "codes": [
+    "401G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-400g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-700G",
+   "model": "FortiGate 700G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-700G.json",
+   "family": "FortiGate",
+   "codes": [
+    "700G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-700g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-701G",
+   "model": "FortiGate 701G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-701G.json",
+   "family": "FortiGate",
+   "codes": [
+    "701G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-700g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-900G-DC",
+   "model": "FortiGate 900G-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-900G-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "900G-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-900g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-901G-DC",
+   "model": "FortiGate 901G-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-901G-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "901G-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-900g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-1000F",
+   "model": "FortiGate 1000F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-1000F.json",
+   "family": "FortiGate",
+   "codes": [
+    "1000F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-1000f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-1001F",
+   "model": "FortiGate 1001F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-1001F.json",
+   "family": "FortiGate",
+   "codes": [
+    "1001F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-1000f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-1800F/-DC",
+   "model": "FortiGate 1800F/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-1800F_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "1800F",
+    "1800F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-1800f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-1801F/-DC",
+   "model": "FortiGate 1801F/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-1801F_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "1801F",
+    "1801F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-1800f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-2200E",
+   "model": "FortiGate 2200E",
+   "form_factor": "appliance",
+   "file": "data/models/FG-2200E.json",
+   "family": "FortiGate",
+   "codes": [
+    "2200E"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-2200e-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-2201E",
+   "model": "FortiGate 2201E",
+   "form_factor": "appliance",
+   "file": "data/models/FG-2201E.json",
+   "family": "FortiGate",
+   "codes": [
+    "2201E"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-2200e-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-2500E",
+   "model": "FortiGate 2500E",
+   "form_factor": "appliance",
+   "file": "data/models/FG-2500E.json",
+   "family": "FortiGate",
+   "codes": [
+    "2500E"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_2500E.pdf#page=8"
+  },
+  {
+   "model_id": "FG-2600F/-DC",
+   "model": "FortiGate 2600F/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-2600F_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "2600F",
+    "2600F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-2600f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-2601F/-DC",
+   "model": "FortiGate 2601F/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-2601F_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "2601F",
+    "2601F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-2600f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3000F-DC",
+   "model": "FortiGate 3000F-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3000F-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "3000F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-3000f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3000G",
+   "model": "FortiGate 3000G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3000G.json",
+   "family": "FortiGate",
+   "codes": [
+    "3000G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-3000g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3001F-DC",
+   "model": "FortiGate 3001F-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3001F-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "3001F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-3000f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3001G",
+   "model": "FortiGate 3001G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3001G.json",
+   "family": "FortiGate",
+   "codes": [
+    "3001G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-3000g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3200F",
+   "model": "FortiGate 3200F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3200F.json",
+   "family": "FortiGate",
+   "codes": [
+    "3200F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-3200f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3201F",
+   "model": "FortiGate 3201F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3201F.json",
+   "family": "FortiGate",
+   "codes": [
+    "3201F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-3200f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3300E",
+   "model": "FortiGate 3300E",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3300E.json",
+   "family": "FortiGate",
+   "codes": [
+    "3300E"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-3300e-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3301E",
+   "model": "FortiGate 3301E",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3301E.json",
+   "family": "FortiGate",
+   "codes": [
+    "3301E"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-3300e-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3500F",
+   "model": "FortiGate 3500F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3500F.json",
+   "family": "FortiGate",
+   "codes": [
+    "3500F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-3500f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3500G",
+   "model": "FortiGate 3500G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3500G.json",
+   "family": "FortiGate",
+   "codes": [
+    "3500G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-3500g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3501F",
+   "model": "FortiGate 3501F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3501F.json",
+   "family": "FortiGate",
+   "codes": [
+    "3501F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-3500f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3501G",
+   "model": "FortiGate 3501G",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3501G.json",
+   "family": "FortiGate",
+   "codes": [
+    "3501G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-3500g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3700F",
+   "model": "FortiGate 3700F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3700F.json",
+   "family": "FortiGate",
+   "codes": [
+    "3700F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-3700f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3701F",
+   "model": "FortiGate 3701F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3701F.json",
+   "family": "FortiGate",
+   "codes": [
+    "3701F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-3700f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3800G/-DC",
+   "model": "FortiGate 3800G/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3800G_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "3800G",
+    "3800G-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-3800g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-3801G/-DC",
+   "model": "FortiGate 3801G/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-3801G_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "3801G",
+    "3801G-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-3800g-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-4200F/-DC",
+   "model": "FortiGate 4200F/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-4200F_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "4200F",
+    "4200F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-4200f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-4201F/-DC",
+   "model": "FortiGate 4201F/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-4201F_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "4201F",
+    "4201F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-4200f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-4400F/-DC",
+   "model": "FortiGate 4400F/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-4400F_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "4400F",
+    "4400F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-4400f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-4401F/-DC",
+   "model": "FortiGate 4401F/-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-4401F_-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "4401F",
+    "4401F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-4400f-series.pdf#page=8"
+  },
+  {
+   "model_id": "FG-4800F/4800F-DC",
+   "model": "FortiGate 4800F/4800F-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-4800F_4800F-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "4800F",
+    "4800F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-4800f-series.pdf#page=9"
+  },
+  {
+   "model_id": "FG-4801F-NEBS/4801F-DC-NEBS",
+   "model": "FortiGate 4801F-NEBS/4801F-DC-NEBS",
+   "form_factor": "appliance",
+   "file": "data/models/FG-4801F-NEBS_4801F-DC-NEBS.json",
+   "family": "FortiGate",
+   "codes": [
+    "4801F-NEBS",
+    "4801F-DC-NEBS"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-4800f-series.pdf#page=9"
+  },
+  {
+   "model_id": "FG-4801F/4801F-DC",
+   "model": "FortiGate 4801F/4801F-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-4801F_4801F-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "4801F",
+    "4801F-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-4800f-series.pdf#page=9"
+  },
+  {
+   "model_id": "FG-7030E",
+   "model": "FortiGate 7030E",
+   "form_factor": "appliance",
+   "file": "data/models/FG-7030E.json",
+   "family": "FortiGate",
+   "codes": [
+    "7030E"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_7000_Series_Bundle.pdf#page=8"
+  },
+  {
+   "model_id": "FG-7040E-8 / 7040E-9-(DC)",
+   "model": "FortiGate 7040E-8 / 7040E-9-(DC)",
+   "form_factor": "appliance",
+   "file": "data/models/FG-7040E-8_7040E-9-_DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "7040E-8",
+    "7040E-9-(DC)"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_7000_Series_Bundle.pdf#page=8"
+  },
+  {
+   "model_id": "FG-7060E-8 / 7060E-9-(DC)",
+   "model": "FortiGate 7060E-8 / 7060E-9-(DC)",
+   "form_factor": "appliance",
+   "file": "data/models/FG-7060E-8_7060E-9-_DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "7060E-8",
+    "7060E-9-(DC)"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_7000_Series_Bundle.pdf#page=8"
+  },
+  {
+   "model_id": "FG-7121F",
+   "model": "FortiGate 7121F",
+   "form_factor": "appliance",
+   "file": "data/models/FG-7121F.json",
+   "family": "FortiGate",
+   "codes": [
+    "7121F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-7000f-series.pdf#page=9"
+  },
+  {
+   "model_id": "FG-7121F-2-DC",
+   "model": "FortiGate 7121F-2-DC",
+   "form_factor": "appliance",
+   "file": "data/models/FG-7121F-2-DC.json",
+   "family": "FortiGate",
+   "codes": [
+    "7121F-2-DC"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-7000f-series.pdf#page=9"
+  },
+  {
+   "model_id": "FGR-50G-5G",
+   "model": "FortiGate Rugged 50G-5G",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-50G-5G.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "50G-5G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FGR-60F",
+   "model": "FortiGate Rugged 60F",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-60F.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "60F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FGR-60F-3G4G",
+   "model": "FortiGate Rugged 60F-3G4G",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-60F-3G4G.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "60F-3G4G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FGR-60G",
+   "model": "FortiGate Rugged 60G",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-60G.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "60G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FGR-60G-5G",
+   "model": "FortiGate Rugged 60G-5G",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-60G-5G.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "60G-5G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FGR-60G-5G-M12",
+   "model": "FortiGate Rugged 60G-5G-M12",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-60G-5G-M12.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "60G-5G-M12"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FGR-60G-M12",
+   "model": "FortiGate Rugged 60G-M12",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-60G-M12.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "60G-M12"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FGR-70F",
+   "model": "FortiGate Rugged 70F",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-70F.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "70F"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FGR-70F-3G4G",
+   "model": "FortiGate Rugged 70F-3G4G",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-70F-3G4G.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "70F-3G4G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FGR-70G",
+   "model": "FortiGate Rugged 70G",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-70G.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "70G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FGR-70G-5G",
+   "model": "FortiGate Rugged 70G-5G",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-70G-5G.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "70G-5G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FGR-70G-5G-DUAL",
+   "model": "FortiGate Rugged 70G-5G-DUAL",
+   "form_factor": "appliance",
+   "file": "data/models/FGR-70G-5G-DUAL.json",
+   "family": "FortiGate Rugged",
+   "codes": [
+    "70G-5G-DUAL"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_Rugged_Series.pdf#page=12"
+  },
+  {
+   "model_id": "FWF-30E",
+   "model": "FortiWiFi 30E",
+   "form_factor": "appliance",
+   "file": "data/models/FWF-30E.json",
+   "family": "FortiWiFi",
+   "codes": [
+    "30E"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_FortiWiFi_30E.pdf#page=5"
+  },
+  {
+   "model_id": "FWF-30G",
+   "model": "FortiWiFi 30G",
+   "form_factor": "appliance",
+   "file": "data/models/FWF-30G.json",
+   "family": "FortiWiFi",
+   "codes": [
+    "30G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-30g-series.pdf#page=9"
+  },
+  {
+   "model_id": "FWF-31G",
+   "model": "FortiWiFi 31G",
+   "form_factor": "appliance",
+   "file": "data/models/FWF-31G.json",
+   "family": "FortiWiFi",
+   "codes": [
+    "31G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-30g-series.pdf#page=9"
+  },
+  {
+   "model_id": "FWF-50G-5G-II",
+   "model": "FortiWiFi 50G-5G-II",
+   "form_factor": "appliance",
+   "file": "data/models/FWF-50G-5G-II.json",
+   "family": "FortiWiFi",
+   "codes": [
+    "50G-5G-II"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-50g-series.pdf#page=12"
+  },
+  {
+   "model_id": "FWF-50G-DSL",
+   "model": "FortiWiFi 50G-DSL",
+   "form_factor": "appliance",
+   "file": "data/models/FWF-50G-DSL.json",
+   "family": "FortiWiFi",
+   "codes": [
+    "50G-DSL"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-50g-series.pdf#page=12"
+  },
+  {
+   "model_id": "FWF-50G-SFP",
+   "model": "FortiWiFi 50G-SFP",
+   "form_factor": "appliance",
+   "file": "data/models/FWF-50G-SFP.json",
+   "family": "FortiWiFi",
+   "codes": [
+    "50G-SFP"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-50g-series.pdf#page=12"
+  },
+  {
+   "model_id": "FWF-50G/-51G",
+   "model": "FortiWiFi 50G/-51G",
+   "form_factor": "appliance",
+   "file": "data/models/FWF-50G_-51G.json",
+   "family": "FortiWiFi",
+   "codes": [
+    "50G",
+    "50G-51G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-50g-series.pdf#page=12"
+  },
+  {
+   "model_id": "FWF-70G",
+   "model": "FortiWiFi 70G",
+   "form_factor": "appliance",
+   "file": "data/models/FWF-70G.json",
+   "family": "FortiWiFi",
+   "codes": [
+    "70G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-70g-series.pdf#page=10"
+  },
+  {
+   "model_id": "FWF-70G-POE",
+   "model": "FortiWiFi 70G-POE",
+   "form_factor": "appliance",
+   "file": "data/models/FWF-70G-POE.json",
+   "family": "FortiWiFi",
+   "codes": [
+    "70G-POE"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-70g-series.pdf#page=10"
+  },
+  {
+   "model_id": "FWF-71G",
+   "model": "FortiWiFi 71G",
+   "form_factor": "appliance",
+   "file": "data/models/FWF-71G.json",
+   "family": "FortiWiFi",
+   "codes": [
+    "71G"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-70g-series.pdf#page=10"
+  },
+  {
+   "model_id": "FG-VM01S",
+   "model": "FortiGate VM-01S",
+   "form_factor": "vm",
+   "file": "data/models/FG-VM01S.json",
+   "family": "FortiGate",
+   "codes": [
+    "VM01S",
+    "VM-01S"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-vm.pdf#page=7"
+  },
+  {
+   "model_id": "FG-VM02S",
+   "model": "FortiGate VM-02S",
+   "form_factor": "vm",
+   "file": "data/models/FG-VM02S.json",
+   "family": "FortiGate",
+   "codes": [
+    "VM02S",
+    "VM-02S"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-vm.pdf#page=7"
+  },
+  {
+   "model_id": "FG-VM04S",
+   "model": "FortiGate VM-04S",
+   "form_factor": "vm",
+   "file": "data/models/FG-VM04S.json",
+   "family": "FortiGate",
+   "codes": [
+    "VM04S",
+    "VM-04S"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-vm.pdf#page=7"
+  },
+  {
+   "model_id": "FG-VM08S",
+   "model": "FortiGate VM-08S",
+   "form_factor": "vm",
+   "file": "data/models/FG-VM08S.json",
+   "family": "FortiGate",
+   "codes": [
+    "VM08S",
+    "VM-08S"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-vm.pdf#page=7"
+  },
+  {
+   "model_id": "FG-VM16S",
+   "model": "FortiGate VM-16S",
+   "form_factor": "vm",
+   "file": "data/models/FG-VM16S.json",
+   "family": "FortiGate",
+   "codes": [
+    "VM16S",
+    "VM-16S"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-vm.pdf#page=7"
+  },
+  {
+   "model_id": "FG-VM32S",
+   "model": "FortiGate VM-32S",
+   "form_factor": "vm",
+   "file": "data/models/FG-VM32S.json",
+   "family": "FortiGate",
+   "codes": [
+    "VM32S",
+    "VM-32S"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-vm.pdf#page=7"
+  },
+  {
+   "model_id": "FG-VMULS",
+   "model": "FortiGate VM-ULS",
+   "form_factor": "vm",
+   "file": "data/models/FG-VMULS.json",
+   "family": "FortiGate",
+   "codes": [
+    "VMULS",
+    "VM-ULS"
+   ],
+   "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/fortigate-vm.pdf#page=7"
+  }
+ ]
+}

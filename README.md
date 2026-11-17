@@ -107,3 +107,16 @@ The GitHub Action runs it after every download, and again whenever `labels.yaml`
 
 - This scrapes the public library page. If Fortinet changes the page layout, discovery may return 0 results. When that happens the script exits with an error rather than wiping anything.
 - Datasheets that are linked only from product pages and not listed in the library won't be picked up.
+
+## FortiGate comparison skill
+
+`skills/fortigate-compare/` is an agent skill (Claude, Hermes, OpenClaw, FortiAgent) that answers
+"compare the 90G and 120G" with a table in chat and builds a Fortinet-branded side-by-side report.
+
+```bash
+python skills/fortigate-compare/scripts/compare.py table 90G 120G
+python skills/fortigate-compare/scripts/compare.py report 90G 120G
+```
+
+The Action also writes `data/index.json` and `data/models/<id>.json` so the skill fetches only the models it needs.
+The report template also works hosted: `report.html?models=FG-90G,FG-120G`.

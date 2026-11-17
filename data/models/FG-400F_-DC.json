@@ -1,0 +1,290 @@
+{
+  "model": "FortiGate 400F/-DC",
+  "model_id": "FG-400F/-DC",
+  "form_factor": "appliance",
+  "source": {
+    "title": "FortiGate 400F Series Data Sheet",
+    "url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-400f-series.pdf",
+    "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-400f-series.pdf#page=8",
+    "file": "fortigate-400f-series.pdf",
+    "library_last_updated": null,
+    "sha256": "70ba4ad841ad49e137b18ba0397a0c051650998b7ab902ef9d31cbaa549444ce"
+  },
+  "specs": {
+    "ips_throughput_mbps": {
+      "value": 12000,
+      "raw": "12 Gbps",
+      "label": "IPS Throughput",
+      "notes": [
+        "2"
+      ]
+    },
+    "ngfw_throughput_mbps": {
+      "value": 10000,
+      "raw": "10 Gbps",
+      "label": "NGFW Throughput",
+      "notes": [
+        "2",
+        "4"
+      ]
+    },
+    "threat_protection_throughput_mbps": {
+      "value": 9000,
+      "raw": "9 Gbps",
+      "label": "Threat Protection Throughput",
+      "notes": [
+        "2",
+        "5"
+      ]
+    },
+    "fw_throughput_1518_mbps": {
+      "value": 79500,
+      "raw": "79.5 / 78.5 / 70 Gbps",
+      "label": "IPv4 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_throughput_512_mbps": {
+      "value": 78500,
+      "raw": "79.5 / 78.5 / 70 Gbps",
+      "label": "IPv4 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_throughput_64_mbps": {
+      "value": 70000,
+      "raw": "79.5 / 78.5 / 70 Gbps",
+      "label": "IPv4 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_ipv6_throughput_1518_mbps": {
+      "value": 79500,
+      "raw": "79.5 / 78.5 / 70 Gbps",
+      "label": "IPv6 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_ipv6_throughput_512_mbps": {
+      "value": 78500,
+      "raw": "79.5 / 78.5 / 70 Gbps",
+      "label": "IPv6 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_ipv6_throughput_small_mbps": {
+      "value": 70000,
+      "raw": "79.5 / 78.5 / 70 Gbps",
+      "label": "IPv6 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_latency_us": {
+      "value": 4.19,
+      "raw": "4.19 μs / 2.5 μs*",
+      "label": "Firewall Latency (64 byte, UDP)"
+    },
+    "fw_pps": {
+      "value": 105000000,
+      "raw": "105 Mpps",
+      "label": "Firewall Throughput (Packet per Second)"
+    },
+    "concurrent_sessions": {
+      "value": 7800000,
+      "raw": "7.8 Million",
+      "label": "Concurrent Sessions (TCP)"
+    },
+    "new_sessions_per_sec": {
+      "value": 500000,
+      "raw": "500 000",
+      "label": "New Sessions/Second (TCP)"
+    },
+    "firewall_policies": {
+      "value": 10000,
+      "raw": "10 000",
+      "label": "Firewall Policies"
+    },
+    "ipsec_throughput_mbps": {
+      "value": 55000,
+      "raw": "55 Gbps",
+      "label": "IPsec VPN Throughput (512 byte)",
+      "notes": [
+        "1"
+      ]
+    },
+    "ipsec_tunnels_g2g": {
+      "value": 2000,
+      "raw": "2000",
+      "label": "Gateway-to-Gateway IPsec VPN Tunnels"
+    },
+    "ipsec_tunnels_c2g": {
+      "value": 50000,
+      "raw": "50 000",
+      "label": "Client-to-Gateway IPsec VPN Tunnels"
+    },
+    "ssl_vpn_throughput_mbps": {
+      "value": 3600,
+      "raw": "3.6 Gbps",
+      "label": "SSL-VPN Throughput"
+    },
+    "ssl_vpn_users": {
+      "value": 5000,
+      "raw": "5000",
+      "label": "Concurrent SSL-VPN Users (Recommended Maximum, Tunnel Mode)"
+    },
+    "ssl_inspection_throughput_mbps": {
+      "value": 8000,
+      "raw": "8 Gbps",
+      "label": "SSL Inspection Throughput (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "ssl_inspection_cps": {
+      "value": 6000,
+      "raw": "6000",
+      "label": "SSL Inspection CPS (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "ssl_inspection_sessions": {
+      "value": 800000,
+      "raw": "800 000",
+      "label": "SSL Inspection Concurrent Session (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "app_control_throughput_mbps": {
+      "value": 28000,
+      "raw": "28 Gbps",
+      "label": "Application Control Throughput (HTTP 64K)",
+      "notes": [
+        "2"
+      ]
+    },
+    "capwap_throughput_mbps": {
+      "value": 65000,
+      "raw": "65 Gbps",
+      "label": "CAPWAP Throughput (HTTP 64K)"
+    },
+    "vdoms_default": {
+      "value": 10,
+      "raw": "10 / 25",
+      "label": "Virtual Domains (Default / Maximum)"
+    },
+    "vdoms_max": {
+      "value": 25,
+      "raw": "10 / 25",
+      "label": "Virtual Domains (Default / Maximum)"
+    },
+    "max_fortiswitches": {
+      "value": 96,
+      "raw": "96**",
+      "label": "Maximum Number of FortiSwitches Supported"
+    },
+    "max_fortiaps_total": {
+      "value": 512,
+      "raw": "512 / 256",
+      "label": "Maximum Number of FortiAPs (Total / Tunnel)"
+    },
+    "max_fortiaps_tunnel": {
+      "value": 256,
+      "raw": "512 / 256",
+      "label": "Maximum Number of FortiAPs (Total / Tunnel)"
+    },
+    "max_fortitokens": {
+      "value": 5000,
+      "raw": "5000",
+      "label": "Maximum Number of FortiTokens"
+    },
+    "ha_modes": {
+      "value": [
+        "Active-Active",
+        "Active-Passive",
+        "Clustering"
+      ],
+      "raw": "Active-Active, Active-Passive, Clustering",
+      "label": "High Availability Configurations"
+    }
+  },
+  "hardware": {
+    "interfaces": [
+      {
+        "type": "Hardware Accelerated GE RJ45 Interfaces",
+        "count": 16,
+        "raw": "16"
+      },
+      {
+        "type": "Hardware Accelerated GE SFP Slots",
+        "count": 8,
+        "raw": "8"
+      },
+      {
+        "type": "Hardware Accelerated 10GE SFP+ Slots",
+        "count": 4,
+        "raw": "4"
+      },
+      {
+        "type": "Hardware Accelerated 10GE SFP+ Ultra Low Latency Slots",
+        "count": 4,
+        "raw": "4"
+      },
+      {
+        "type": "GE RJ45 Management Ports",
+        "count": 2,
+        "raw": "2"
+      },
+      {
+        "type": "USB Ports",
+        "count": 1,
+        "raw": "1"
+      },
+      {
+        "type": "RJ45 Console Port",
+        "count": 1,
+        "raw": "1"
+      }
+    ],
+    "storage": "0",
+    "tpm": true,
+    "ble": null,
+    "included_transceivers": "2x SFP (SX 1 GE)",
+    "dimensions_mm_raw": "44.45 x 432 x 380",
+    "weight_raw": "14.11 lbs (6.4 kg)",
+    "form_factor": "Rack Mount, 1 RU",
+    "power_avg_w": 154.8,
+    "power_max_w": 189.2,
+    "power_raw": "154.8 W / 189.2 W",
+    "heat_dissipation_raw": "645.58 BTU/h",
+    "redundant_psu": false,
+    "operating_temp_raw": "32°F to 104°F (0°C to 40°C)",
+    "noise_level": "LPA 48 dBA / LWA 55 dBA",
+    "airflow": "Side and Front to Back",
+    "compliance": "FCC Part 15 Class A, RCM, VCCI, CE, UL/cUL, CB",
+    "certifications": "USGv6/IPv6",
+    "dimensions_mm": {
+      "h": 44.45,
+      "w": 432.0,
+      "l": 380.0
+    },
+    "weight_kg": 6.4,
+    "rack_units": 1,
+    "desktop": false,
+    "heat_btu_h": 645.58,
+    "operating_temp_c": {
+      "min": 0,
+      "max": 40
+    }
+  },
+  "vm": null,
+  "footnotes": {
+    "note": "All performance values are “up to” and vary depending on system configuration.",
+    "1": "IPsec VPN performance test uses AES256-SHA256.",
+    "2": "IPS (Enterprise Mix), Application Control, NGFW and Threat Protection are measured with Logging enabled.",
+    "3": "SSL Inspection performance values use an average of HTTPS sessions of different cipher suites.",
+    "4": "NGFW performance is measured with Firewall, IPS and Application Control enabled.",
+    "5": "Threat Protection performance is measured with Firewall, IPS, Application Control and Malware Protection enabled."
+  },
+  "other": {
+    "Signed Firmware Hardware Switch": "—",
+    "Height x Width x Length (inches)": "1.75 x 17.0 x 15.0",
+    "AC Power Input": "100–240V AC, 50/60Hz",
+    "AC Current (Maximum)": "6A",
+    "DC Power Supply": "48-60VDC",
+    "DC Current (Maximum)": "12A",
+    "Power Supply Efficiency Rating": "80Plus Compliant",
+    "Storage Temperature": "-31°F to 158°F (-35°C to 70°C)",
+    "Humidity": "5% to 90% non-condensing",
+    "Operating Altitude": "Up to 10 000 ft (3048 m)"
+  }
+}
