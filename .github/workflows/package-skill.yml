@@ -1,0 +1,41 @@
+name: Package FortiAgent skill
+
+# Rebuilds fortigate-head-to-head.tgz whenever the FortiAgent skill changes on
+# main and publishes it to the "fortigate-head-to-head" release, so the latest
+# package is always at:
+# https://github.com/jclark1978/ds-grabber/releases/download/fortigate-head-to-head/fortigate-head-to-head.tgz
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "skills/fortiagent/fortigate-head-to-head/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Build tgz
+        run: |
+          cd skills/fortiagent
+          tar -czf "$GITHUB_WORKSPACE/fortigate-head-to-head.tgz" fortigate-head-to-head
+          tar -tzf "$GITHUB_WORKSPACE/fortigate-head-to-head.tgz"
+
+      - name: Publish to release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=fortigate-head-to-head
+          NOTES="FortiAgent package for the FortiGate Head-to-Head skill. Rebuilt automatically from skills/fortiagent/fortigate-head-to-head on $(date -u +%Y-%m-%d), commit ${GITHUB_SHA::7}."
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" fortigate-head-to-head.tgz --clobber
+            gh release edit "$TAG" --notes "$NOTES"
+          else
+            gh release create "$TAG" fortigate-head-to-head.tgz --title "FortiGate Head-to-Head (FortiAgent)" --notes "$NOTES"
+          fi

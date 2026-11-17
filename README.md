@@ -120,3 +120,6 @@ python skills/fortigate-head-to-head/scripts/compare.py report 90G 120G
 
 The Action also writes `data/index.json` and `data/models/<id>.json` so the skill fetches only the models it needs.
 The report template (`fortigate-head-to-head-template.html`) renders from one JSON block: either model ids (loaded live from this repo) or embedded records (offline snapshot). It also accepts `?models=FG-90G,FG-120G`.
+
+Latest FortiAgent package (rebuilt automatically when the skill changes):
+https://github.com/jclark1978/ds-grabber/releases/download/fortigate-head-to-head/fortigate-head-to-head.tgz
