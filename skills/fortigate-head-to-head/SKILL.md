@@ -70,8 +70,10 @@ Preferred:
 python scripts/compare.py table 90G 120G
 ```
 
-Paste its markdown output. Without code: fetch each model's file and build the
-same table yourself from `specs.<field>.value`, using these rows when present:
+Paste its markdown output. The script orders models smallest to largest
+(hardware by model number, then VMs by size); keep that order. Without code: fetch each model's file and build the
+same table yourself from `specs.<field>.value`, models ordered smallest to
+largest by model number (hardware first, then VMs by size), using these rows when present:
 Threat Protection, NGFW, IPS, SSL Inspection throughput; Firewall throughput
 (1518 and 64 byte); Concurrent Sessions; New Sessions/Sec; Firewall Policies;
 IPsec throughput and tunnels; VDOMs (max); Max FortiSwitches; Max FortiAPs.

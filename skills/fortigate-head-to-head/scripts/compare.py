@@ -72,12 +72,27 @@ def resolve(name: str, index: dict) -> list[dict]:
         return exact
     code, fam = norm(name), family_hint(name)
     hits = [m for m in index["models"] if code in m["codes"]]
+    if not hits and re.fullmatch(r"VM-?(\d+|UL)", code):  # VM04 -> VM04S
+        vm = code.replace("-", "") + "S"
+        hits = [m for m in index["models"] if vm in m["codes"]]
     if fam:
         hits = [m for m in hits if m["family"] == fam]
     elif len(hits) > 1:  # plain "70G" means FortiGate unless the user said otherwise
         fg = [m for m in hits if m["family"] == "FortiGate"]
         hits = fg or hits
     return hits
+
+
+def size_key(m: dict) -> tuple:
+    """Smallest to largest: hardware by model number, letter tiebreak, then VMs by size."""
+    prefix, _, code = m["model_id"].partition("-")
+    if code.upper().startswith("VM"):
+        n = 99999 if "UL" in code.upper() else int((re.search(r"\d+", code) or [0])[0] or 0)
+        return (1, n, 0, 0)
+    mt = re.search(r"(\d+)([A-Z]?)", code, re.I)
+    num = int(mt.group(1)) if mt else 0
+    letter = ord(mt.group(2).upper()) if mt and mt.group(2) else 0
+    return (0, num, letter, {"FG": 0, "FWF": 1, "FGR": 2}.get(prefix, 9))
 
 
 def load(names: list[str], data_dir: str | None) -> tuple[list[dict], list[str]]:
@@ -95,6 +110,7 @@ def load(names: list[str], data_dir: str | None) -> tuple[list[dict], list[str]]
             problems.append(f"'{n}': ambiguous, matches " + ", ".join(h["model_id"] for h in hits))
         else:
             models.append(fetch_json(hits[0]["file"], data_dir))
+    models.sort(key=size_key)
     return models, problems
 
 
