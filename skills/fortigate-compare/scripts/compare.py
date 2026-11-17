@@ -19,7 +19,7 @@ from pathlib import Path
 
 DATA_BASE = "https://raw.githubusercontent.com/jclark1978/ds-grabber/main/"
 HERE = Path(__file__).resolve().parent
-TEMPLATE = HERE.parent / "templates" / "report.html"
+TEMPLATE = HERE.parent / "fortigate-compare-template.html"
 
 # (field, label, kind, direction) direction: 1 higher is better, -1 lower is better
 TABLE_ROWS = [
@@ -154,13 +154,15 @@ def table(models: list[dict]) -> str:
 
 
 def report(models: list[dict], out: Path) -> Path:
+    """Copy the template and fill only the compare-data JSON (embedded snapshot)."""
     html = TEMPLATE.read_text(encoding="utf-8")
-    payload = json.dumps(models, ensure_ascii=False).replace("</", "<\\/")
-    marker = '<script id="ds-data" type="application/json">[]</script>'
-    if marker not in html:
-        raise SystemExit("Template is missing the ds-data placeholder.")
-    out.write_text(html.replace(marker, f'<script id="ds-data" type="application/json">{payload}</script>'),
-                   encoding="utf-8")
+    m = re.search(r'<script id="compare-data" type="application/json">.*?</script>', html, re.S)
+    if not m:
+        raise SystemExit("Template is missing the compare-data block.")
+    data = {"models": [x["model_id"] for x in models], "records": models}
+    payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    block = f'<script id="compare-data" type="application/json">{payload}</script>'
+    out.write_text(html[:m.start()] + block + html[m.end():], encoding="utf-8")
     return out
 
 

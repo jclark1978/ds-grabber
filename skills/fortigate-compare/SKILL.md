@@ -32,7 +32,7 @@ Base URL: `https://raw.githubusercontent.com/jclark1978/ds-grabber/main/`
 | `data/index.json` | Every model: `model_id`, `family`, `codes` (bare model codes), `file`, `spec_url` |
 | `data/models/<id>.json` | Full record for one model (about 8 KB) |
 
-Bundled files (`scripts/compare.py`, `templates/report.html`) sit next to this
+Bundled files (`scripts/compare.py`, `fortigate-compare-template.html`) sit next to this
 SKILL.md. If they are missing, download them from the same base URL under
 `skills/fortigate-compare/`. If raw GitHub is blocked in your environment,
 clone the public repo `jclark1978/ds-grabber` and pass `--data <clone path>`
@@ -93,14 +93,11 @@ Preferred:
 python scripts/compare.py report 90G 120G -o fortigate-comparison-90G-vs-120G.html
 ```
 
-Without code: read `templates/report.html`, replace
-
-```html
-<script id="ds-data" type="application/json">[]</script>
-```
-
-with the same tag containing a JSON array of the full model records exactly as
-fetched (do not edit or retype values). The page formats everything itself.
+Without code: copy `fortigate-compare-template.html` and change ONLY the JSON
+inside `<script id="compare-data" type="application/json">` to
+`{"models": ["FG-90G", "FG-120G"], "records": []}` (resolved `model_id` values).
+The page loads the records itself when opened. The script instead embeds the
+full records as an offline snapshot.
 
 Deliver the HTML file. It has Fortinet branding, every spec section, the
 footnotes with test conditions, datasheet links, Print / Save PDF and CSV

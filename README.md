@@ -110,7 +110,7 @@ The GitHub Action runs it after every download, and again whenever `labels.yaml`
 
 ## FortiGate comparison skill
 
-`skills/fortigate-compare/` is an agent skill (Claude, Hermes, OpenClaw, FortiAgent) that answers
+`skills/fortigate-compare/` is the Claude version and `skills/fortiagent/fortigate-compare/` the FortiAgent version of an agent skill that answers
 "compare the 90G and 120G" with a table in chat and builds a Fortinet-branded side-by-side report.
 
 ```bash
@@ -119,4 +119,4 @@ python skills/fortigate-compare/scripts/compare.py report 90G 120G
 ```
 
 The Action also writes `data/index.json` and `data/models/<id>.json` so the skill fetches only the models it needs.
-The report template also works hosted: `report.html?models=FG-90G,FG-120G`.
+The report template (`fortigate-compare-template.html`) renders from one JSON block: either model ids (loaded live from this repo) or embedded records (offline snapshot). It also accepts `?models=FG-90G,FG-120G`.
