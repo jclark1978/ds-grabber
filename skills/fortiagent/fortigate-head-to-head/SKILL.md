@@ -20,30 +20,34 @@ ftnt-ai-agent:
 Compare 2 to 4 FortiGate models from Fortinet datasheet data: a table in chat first, then an HTML side-by-side report on request. Everything is read-only. This skill is self-contained: it loads no other skill.
 
 ## Data source
-All specs come from the ds-grabber project, which extracts them from Fortinet's official datasheets every week.
-- Base URL: `https://raw.githubusercontent.com/jclark1978/ds-grabber/main/`
-- `data/index.json`: every model with `model_id`, `model`, `family` (FortiGate, FortiWiFi, FortiGate Rugged), `form_factor` (appliance or vm), `codes` (bare model codes such as "90G", "1800F-DC", "VM04S"), `file`, `spec_url`.
-- `data/models/<id>.json`: the full record for one model (path is the index entry's `file`).
+All specs come from the ds-grabber project, which extracts them from Fortinet's official datasheets every week. The skill's helper `ds-specs.js` does every fetch and match; never fetch or parse the data any other way.
+- Data lives at `https://raw.githubusercontent.com/jclark1978/ds-grabber/main/`. The helper reads the small `data/index.json` plus one `data/models/<id>.json` per model, and falls back to the full `data/models.json` when the index is unavailable.
+- If every ds-grabber URL answers 404, the GitHub repository is private. Say so in one line and stop. Never fall back to remembered specs.
 
-Fetch with the platform's web fetch tool when it returns the raw JSON, otherwise `curl -s <url>` in a ```bash block. Use the JSON exactly as returned. If the data cannot be fetched, say so in one line and stop. Never fall back to remembered specs.
+Fields in each resolved model: `model`, `model_id`, `form_factor`, `spec_url` (the original Fortinet PDF opened on its spec page), and `specs.<field>` with `value` (normalized: throughput in Mbps, counts as plain numbers), `raw` (as printed in the datasheet) and `notes` (footnote keys).
 
-Record fields used:
-- `model`, `model_id`, `form_factor`
-- `source.spec_url`: the original Fortinet PDF opened on its spec page
-- `specs.<field>.value`: normalized number (throughput in Mbps, counts as plain numbers)
-- `specs.<field>.raw`: the value exactly as printed in the datasheet
-- `specs.<field>.notes`: footnote keys, explained in `footnotes`
+## Step 0: Set up and fetch, one plain command
+The fetch is the purpose of this skill and is expected on every run.
+
+1. If `ds-specs.js` or `fortigate-head-to-head-template.html` is not in the session working directory, write it there from the skill's file of the same name. A write inside the chat's own folder needs no approval.
+2. Run exactly one plain command with the names the user typed, in their order, each name as one argument: `node ds-specs.js 90G 120G`. Quote a name that has spaces: `node ds-specs.js "FortiWiFi 70G" 90G`.
+3. It prints one JSON object: `source`, `resolved[]` and `unresolved[]` (each with `query` and `candidates`). Build everything you print from that output.
+4. An `{"error": ...}` output means the fetch failed. Report it in one line and stop.
+
+If node cannot reach the network but curl can: `curl -s -o ds-models.json https://raw.githubusercontent.com/jclark1978/ds-grabber/main/data/models.json`, then `node ds-specs.js --data ds-models.json 90G 120G`.
+
+Shell rules for this skill, with no exceptions:
+- One plain command per call: no `>` redirect, no `$(...)`, no backtick, no variable, no `cd ... && ...`. A line like that cannot be read as plain commands and always raises an approval.
+- Write only inside the session working directory. `/tmp` and every other path outside the chat ask for approval on every call, and those can never be granted.
+- Never run a command that prints credentials or tokens: `gh auth status`, `env`, `printenv`, `cat` on a key file.
 
 ## Step 1: Resolve the models
-- Fetch `data/index.json`.
-- For each model the user named: strip "FortiGate", "FortiWiFi", "Rugged", "FGT", "FG-", "FWF-", "FGR-" and spaces, uppercase it, and match it against each entry's `codes`. An exact `model_id` match wins.
-- A plain code such as "70G" means the FortiGate model unless the user said FortiWiFi or Rugged.
+- The helper matches what the user typed: it strips FortiGate, FortiWiFi, Rugged, FGT, FG-, FWF-, FGR- and spaces, and matches bare codes such as 90G, 51G, 1800F-DC or VM04S. A plain code such as 70G means the FortiGate model unless the user said FortiWiFi or Rugged. Pass names exactly as typed.
+- Every entry in `unresolved[]` needs the user: when it has `candidates`, ask which one with the `question` tool, one option per candidate, and wait. With no candidates, say the model is not in the datasheet data. Never guess.
 - More than 4 models: ask the user to pick up to 4.
-- A name that matches more than one model (for example "50G" covers several 50G variants): ask which one with the `question` tool, one option per match using the index `model` as the label. If the question tool is unavailable, ask in one line and wait.
-- A name that matches nothing: say so and list up to 10 nearby codes from the index. Never guess.
 
 ## Step 2: Chat table (every run)
-Fetch each resolved model's `file` and post one markdown table.
+Take the entries from `resolved[]` and post one markdown table.
 - Columns: Spec, then one column per model (use `model`), in the order the user named them. With exactly 2 models add a last column "<second> vs <first>" with the percent difference, "Same" when equal, one decimal when under 1%.
 - Rows, in this order, only when at least one model has the field:
   Threat Protection Throughput (`threat_protection_throughput_mbps`), NGFW Throughput (`ngfw_throughput_mbps`), IPS Throughput (`ips_throughput_mbps`), SSL Inspection Throughput (`ssl_inspection_throughput_mbps`), Firewall Throughput 1518 B UDP (`fw_throughput_1518_mbps`), Firewall Throughput 64 B UDP (`fw_throughput_64_mbps`), Concurrent Sessions (`concurrent_sessions`), New Sessions/Sec (`new_sessions_per_sec`), Firewall Policies (`firewall_policies`), IPsec VPN Throughput (`ipsec_throughput_mbps`), Site-to-Site IPsec Tunnels (`ipsec_tunnels_g2g`), Client-to-Site IPsec Tunnels (`ipsec_tunnels_c2g`), VDOMs Max (`vdoms_max`), Max FortiSwitches (`max_fortiswitches`), Max FortiAPs (`max_fortiaps_total`).
@@ -64,10 +68,12 @@ Build the side-by-side report
 Omit it when the comparison could not be built.
 
 ## Step 3: HTML report (when asked)
-Copy the skill's own template `skill:fortigate-head-to-head/fortigate-head-to-head-template.html` and modify ONLY the JSON inside `<script id="compare-data" type="application/json">`. Never edit the template's HTML, CSS, or JavaScript; same layout every run.
-- Replace the sample JSON entirely with: `{"models": ["<model_id>", "<model_id>"], "records": []}` using the resolved `model_id` values in display order. Keep the field names exactly.
-- The page loads each model's record from the ds-grabber data when it opens, formats every value, and adds footnotes, datasheet links, Expand/Collapse, Export CSV and Print / Save PDF. Opening it needs internet access.
-- Output file name: `fortigate-head-to-head-<ID1>-vs-<ID2>[-vs-...]-YYYY-MM-DD.html` with non-alphanumeric characters removed from each id (FG-90G becomes FG90G). Write it into the session working directory.
+Run one plain command with the same names, in display order:
+`node ds-specs.js --report fortigate-head-to-head-<ID1>-vs-<ID2>[-vs-...]-YYYY-MM-DD.html 90G 120G`
+- File name: each `model_id` with non-alphanumeric characters removed (FG-90G becomes FG90G), today's date. It is written into the session working directory.
+- The helper copies the skill's template `skill:fortigate-head-to-head/fortigate-head-to-head-template.html` and fills ONLY the JSON inside `<script id="compare-data" type="application/json">` with the full model records. Never edit the template or the generated file by hand, and never paste records yourself.
+- The records are embedded, so the report opens with no network access and no GitHub permissions for whoever reads it. It formats every value and adds footnotes, datasheet links, Expand/Collapse, Export CSV and Print / Save PDF.
+- The output's `report` field is the file name written. `report_skipped` means a model is still unresolved: settle it first.
 
 ## Chat summary for the report
 Alongside the file, post a 1 to 2 line summary: which models it covers and where the file is. The file carries the detail; the chat does not repeat the table.
@@ -83,7 +89,8 @@ Open the report in my browser
 - Omit the FollowUp when the run wrote no file.
 
 ## Rules
-- Every spec comes from the ds-grabber data. Never invent or remember a value. If something is not found, say so.
+- Every spec comes from the ds-grabber data through `ds-specs.js`. Never invent or remember a value. If something is not found, say so.
 - Always include each model's datasheet link (`source.spec_url`).
 - Up to 4 models per comparison.
+- One plain shell command per call, all writes inside the session working directory, no commands that print credentials.
 - No em dashes. Plain, direct language. Product names exactly: FortiGate, FortiWiFi, FortiSwitch, FortiAP.
