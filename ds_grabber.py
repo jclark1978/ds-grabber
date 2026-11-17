@@ -302,7 +302,8 @@ def sync(items: list[dict], out_dir: Path, manifest_path: Path, force: bool = Fa
             "bytes": len(data),
         }
 
-    manifest["generated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    if stats["new"] or stats["updated"] or not manifest.get("generated"):
+        manifest["generated"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n")
     write_index(entries, out_dir / "INDEX.md")
     return stats
