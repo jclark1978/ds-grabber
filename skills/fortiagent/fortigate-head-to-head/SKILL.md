@@ -2,7 +2,7 @@
 name: FortiGate Head-to-Head
 description: Side-by-side comparison of 2 to 4 FortiGate, FortiWiFi or FortiGate
   Rugged models (hardware and VM) from official Fortinet datasheet data, shown
-  as a table in chat, with an optional HTML report rendered from the skill's own
+  as a table in chat plus an HTML side-by-side report rendered from the skill's own
   fortigate-head-to-head-template.html. Use when the user says "compare the 90G and
   120G", "90G vs 120G", "show me a side-by-side of the 400F and 700G", or asks
   which FortiGate model has more of a given spec.
@@ -17,7 +17,7 @@ ftnt-ai-agent:
     - sizing
     - html
 ---
-Compare 2 to 4 FortiGate models from Fortinet datasheet data: a table in chat first, then an HTML side-by-side report on request. Everything is read-only. This skill is self-contained: it loads no other skill.
+Compare 2 to 4 FortiGate models from Fortinet datasheet data: every run posts a table in chat and writes an HTML side-by-side report with a button to open it. Everything is read-only. This skill is self-contained: it loads no other skill.
 
 ## Data source
 All specs come from the ds-grabber project, which extracts them from Fortinet's official datasheets every week. The skill's helper `ds-specs.js` does every fetch and match; never fetch or parse the data any other way.
@@ -30,11 +30,11 @@ Fields in each resolved model: `model`, `model_id`, `form_factor`, `spec_url` (t
 The fetch is the purpose of this skill and is expected on every run.
 
 1. If `ds-specs.js` or `fortigate-head-to-head-template.html` is not in the session working directory, write it there from the skill's file of the same name. A write inside the chat's own folder needs no approval.
-2. Run exactly one plain command with the names the user typed, in their order, each name as one argument: `node ds-specs.js 90G 120G`. Quote a name that has spaces: `node ds-specs.js "FortiWiFi 70G" 90G`.
-3. It prints one JSON object: `source`, `resolved[]` and `unresolved[]` (each with `query` and `candidates`). Build everything you print from that output.
+2. Run exactly one plain command with the names the user typed, in their order, each name as one argument: `node ds-specs.js --report auto 90G 120G`. Quote a name that has spaces: `node ds-specs.js --report auto "FortiWiFi 70G" 90G`. This one command fetches the data, resolves the models and writes the report.
+3. It prints one JSON object: `source`, `resolved[]`, `unresolved[]` (each with `query` and `candidates`), and `report` plus `report_path` (the file it wrote). Build everything you print from that output.
 4. An `{"error": ...}` output means the fetch failed. Report it in one line and stop.
 
-If node cannot reach the network but curl can: `curl -s -o ds-models.json https://raw.githubusercontent.com/jclark1978/ds-grabber/main/data/models.json`, then `node ds-specs.js --data ds-models.json 90G 120G`.
+If node cannot reach the network but curl can: `curl -s -o ds-models.json https://raw.githubusercontent.com/jclark1978/ds-grabber/main/data/models.json`, then `node ds-specs.js --data ds-models.json --report auto 90G 120G`.
 
 Shell rules for this skill, with no exceptions:
 - One plain command per call: no `>` redirect, no `$(...)`, no backtick, no variable, no `cd ... && ...`. A line like that cannot be read as plain commands and always raises an approval.
@@ -43,7 +43,7 @@ Shell rules for this skill, with no exceptions:
 
 ## Step 1: Resolve the models
 - The helper matches what the user typed: it strips FortiGate, FortiWiFi, Rugged, FGT, FG-, FWF-, FGR- and spaces, and matches bare codes such as 90G, 51G, 1800F-DC or VM04S. A plain code such as 70G means the FortiGate model unless the user said FortiWiFi or Rugged. Pass names exactly as typed.
-- Every entry in `unresolved[]` needs the user: when it has `candidates`, ask which one with the `question` tool, one option per candidate, and wait. With no candidates, say the model is not in the datasheet data. Never guess.
+- Every entry in `unresolved[]` needs the user (no report is written while any remain; the output shows `report_skipped`): when it has `candidates`, ask which one with the `question` tool, one option per candidate, and wait. With no candidates, say the model is not in the datasheet data. Never guess. Then run the same command again with the settled names.
 - More than 4 models: ask the user to pick up to 4.
 
 ## Step 2: Chat table (every run)
@@ -58,35 +58,22 @@ Take the entries from `resolved[]` and post one markdown table.
 - When a VM is compared with hardware, add: "The FortiGate VM datasheet lists capacity only, not throughput."
 - Mention once that performance values are "up to" figures with test conditions in each datasheet's footnotes. No other caveats.
 
-## Offering the report (every attended run)
-After the chat table, when the reply lands in a chat that can show a FollowUp section, end the reply with exactly:
-
-<FollowUp>
-Build the side-by-side report
-</FollowUp>
-
-Omit it when the comparison could not be built.
-
-## Step 3: HTML report (when asked)
-Run one plain command with the same names, in display order:
-`node ds-specs.js --report fortigate-head-to-head-<ID1>-vs-<ID2>[-vs-...]-YYYY-MM-DD.html 90G 120G`
-- File name: each `model_id` with non-alphanumeric characters removed (FG-90G becomes FG90G), today's date. It is written into the session working directory.
+## Step 3: Side-by-side report (every run)
+The command in Step 0 already wrote it; never build or edit it any other way.
 - The helper copies the skill's template `skill:fortigate-head-to-head/fortigate-head-to-head-template.html` and fills ONLY the JSON inside `<script id="compare-data" type="application/json">` with the full model records. Never edit the template or the generated file by hand, and never paste records yourself.
+- File name: `fortigate-head-to-head-<ID1>-vs-<ID2>[-vs-...]-YYYY-MM-DD.html` in the session working directory (`report`), full path in `report_path`.
 - The records are embedded, so the report opens with no network access and no GitHub permissions for whoever reads it. It formats every value and adds footnotes, datasheet links, Expand/Collapse, Export CSV and Print / Save PDF.
-- The output's `report` field is the file name written. `report_skipped` means a model is still unresolved: settle it first.
+- After the table and its sentences, add one line: "Side-by-side report: `<report>`".
 
-## Chat summary for the report
-Alongside the file, post a 1 to 2 line summary: which models it covers and where the file is. The file carries the detail; the chat does not repeat the table.
-
-## Offering to open the report (every attended run)
-After the report summary, when the reply lands in a chat that can show a FollowUp section, end the reply with exactly:
+## Opening the report (every attended run)
+End every reply that wrote a report, when the reply lands in a chat that can show a FollowUp section, with exactly:
 
 <FollowUp>
 Open the report in my browser
 </FollowUp>
 
-- The line is sent verbatim when the user clicks it. When you receive it, open the HTML file written by this run from its absolute path with the platform's opener in a ```bash block: `open <path>` on macOS, `start "" <path>` on Windows, `xdg-open <path>` on Linux. The shell call may ask for approval; a refusal is final, so report it and give the path again as a clickable inline link. Only ever open a local file written by this skill.
-- Omit the FollowUp when the run wrote no file.
+- The line is sent verbatim when the user clicks it. When you receive it, open `report_path` from this run with the platform's opener in a ```bash block: `open <path>` on macOS, `start "" <path>` on Windows, `xdg-open <path>` on Linux. The shell call may ask for approval; a refusal is final, so report it and give the path again as a clickable inline link. Only ever open a local file written by this skill.
+- Omit the FollowUp when the run wrote no report (a model is still unresolved, or the fetch failed).
 
 ## Rules
 - Every spec comes from the ds-grabber data through `ds-specs.js`. Never invent or remember a value. If something is not found, say so.
