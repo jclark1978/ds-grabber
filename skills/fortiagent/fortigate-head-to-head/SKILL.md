@@ -67,7 +67,7 @@ The command in Step 0 already wrote it; never build or edit it any other way.
 
 ## Opening the report (every attended run)
 End every reply that wrote a report by asking whether to open it, with the `question` tool:
-- Question: "Open the full Fortinet-formatted side-by-side report in your browser? It has more detail than the table above."
+- Question: "Open the full Fortinet-formatted side-by-side report in your browser?"
 - Options, each with its description:
   - "Yes, open it" - description: "Every spec, plus hardware, ports, power, test-condition footnotes and datasheet links. Print to PDF or export to CSV."
   - "Not now" - description: "The report stays saved in this chat's folder."
