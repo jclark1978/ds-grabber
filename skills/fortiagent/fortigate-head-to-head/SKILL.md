@@ -66,14 +66,18 @@ The command in Step 0 already wrote it; never build or edit it any other way.
 - After the table and its sentences, add one line: "Side-by-side report: `<report>`".
 
 ## Opening the report (every attended run)
-End every reply that wrote a report, when the reply lands in a chat that can show a FollowUp section, with exactly:
+End every reply that wrote a report by asking whether to open it, with the `question` tool:
+- Question: "Open the Fortinet-formatted side-by-side report in your browser?"
+- Options: "Yes, open it" and "Not now".
+- "Yes, open it": open `report_path` from this run with the platform's opener in a ```bash block: `open <path>` on macOS, `start "" <path>` on Windows, `xdg-open <path>` on Linux. The shell call may ask for approval; a refusal is final, so report it and give the path again as a clickable inline link. Only ever open a local file written by this skill.
+- "Not now", or the user dismisses the question: reply in one line with the file name so they can open it later. Do not ask again.
+- If the question tool is unavailable, end the reply instead with exactly the block below; when the user clicks it, the line is sent verbatim, so treat it like "Yes, open it":
 
 <FollowUp>
-Open the report in my browser
+📄 Open the Fortinet report in my browser
 </FollowUp>
 
-- The line is sent verbatim when the user clicks it. When you receive it, open `report_path` from this run with the platform's opener in a ```bash block: `open <path>` on macOS, `start "" <path>` on Windows, `xdg-open <path>` on Linux. The shell call may ask for approval; a refusal is final, so report it and give the path again as a clickable inline link. Only ever open a local file written by this skill.
-- Omit the FollowUp when the run wrote no report (a model is still unresolved, or the fetch failed).
+- Never ask or show the button when the run wrote no report (a model is still unresolved, or the fetch failed), or when the reply goes somewhere without interactive elements (a channel send).
 
 ## Rules
 - Every spec comes from the ds-grabber data through `ds-specs.js`. Never invent or remember a value. If something is not found, say so.
