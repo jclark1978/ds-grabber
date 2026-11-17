@@ -27,7 +27,13 @@ from urllib.parse import urljoin, urlparse
 import requests
 
 LIBRARY_URL = "https://www.fortinet.com/resources/data-sheets"
+# The library does not list every datasheet (e.g. 50G, 120G, 400F, 1000F are
+# missing), so also harvest the model tables on these product pages.
+PRODUCT_PAGES = [
+    "https://www.fortinet.com/products/next-generation-firewall?tab=models-specs",
+]
 BASE = "https://www.fortinet.com"
+PDF_HREF_RE = re.compile(r'href="([^"]*/content/dam/[^"]*data-?sheets?[^"]*?\.pdf)', re.I)
 USER_AGENT = (
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_0) AppleWebKit/537.36 "
     "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
@@ -45,8 +51,8 @@ COLLECT_JS = r"""
   const out = [];
   const seen = new Set();
   for (const a of document.querySelectorAll('a[href]')) {
-    const href = a.href;
-    if (!/\.pdf(\?|#|$)/i.test(href)) continue;
+    const href = a.href.split('#')[0];
+    if (!/\.pdf(\?|$)/i.test(href)) continue;
     if (!/data-?sheet/i.test(href)) continue;
     if (seen.has(href)) continue;
     seen.add(href);
@@ -74,7 +80,14 @@ def discover(headless: bool = True, max_clicks: int = 100) -> list[dict]:
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=headless)
         page = browser.new_page(user_agent=USER_AGENT)
-        page.goto(LIBRARY_URL, wait_until="networkidle", timeout=90_000)
+        print(f"Loading {LIBRARY_URL} ...", flush=True)
+        page.goto(LIBRARY_URL, wait_until="domcontentloaded", timeout=60_000)
+        # Marketing pages never go "network idle" (trackers), so wait for the
+        # first datasheet link to render instead.
+        try:
+            page.wait_for_selector('a[href*="data-sheet"][href$=".pdf"], a[href*="data-sheets"]', timeout=30_000)
+        except Exception:
+            print("  warning: no datasheet links rendered within 30s", flush=True)
 
         # Dismiss the cookie banner if present; it can block clicks.
         for label in ("Accept All", "Accept all", "Accept", "I Accept"):
@@ -87,26 +100,117 @@ def discover(headless: bool = True, max_clicks: int = 100) -> list[dict]:
                     pass
 
         # Click "Load More" until it disappears or stops adding results.
-        last = -1
-        for clicks in range(max_clicks):
-            count = len(page.evaluate(COLLECT_JS))
-            if count == last:
-                break
-            last = count
+        clicks = 0
+        count = len(page.evaluate(COLLECT_JS))
+        print(f"  initial: {count} PDFs", flush=True)
+        while clicks < max_clicks:
             more = page.locator("a, button").filter(has_text=re.compile(r"load\s+\d*\s*more", re.I))
             if not more.count() or not more.first.is_visible():
+                print("  no more 'Load More' button", flush=True)
                 break
             try:
                 more.first.scroll_into_view_if_needed(timeout=5_000)
                 more.first.click(timeout=10_000)
-                page.wait_for_load_state("networkidle", timeout=30_000)
-            except Exception:
-                time.sleep(2)
+            except Exception as e:
+                print(f"  click failed: {e.__class__.__name__}", flush=True)
+                break
+            clicks += 1
+            # Poll up to 15s for new results instead of waiting on network idle.
+            new = count
+            for _ in range(30):
+                time.sleep(0.5)
+                new = len(page.evaluate(COLLECT_JS))
+                if new > count:
+                    break
+            print(f"  click {clicks}: {new} PDFs", flush=True)
+            if new <= count:
+                break
+            count = new
         raw = page.evaluate(COLLECT_JS)
+        print(f"Library: {len(raw)} datasheet PDFs found after {clicks} 'Load More' clicks", flush=True)
+        items = [parse_card(r) for r in raw]
+
+        extra = harvest_product_pages(page)
         browser.close()
 
-    print(f"Library: {len(raw)} datasheet PDFs found after {clicks} 'Load More' clicks")
-    return [parse_card(r) for r in raw]
+    # Merge, keyed by filename. Library entries win (they carry a date).
+    by_name = {filename_for(i["url"]).lower(): i for i in items}
+    added = 0
+    for i in extra:
+        key = filename_for(i["url"]).lower()
+        if key not in by_name:
+            by_name[key] = i
+            added += 1
+    print(f"Product pages: {len(extra)} datasheets, {added} not in the library", flush=True)
+    return list(by_name.values())
+
+
+def harvest_product_pages(page) -> list[dict]:
+    """Collect datasheets linked from product-page model tables.
+
+    Links are either direct PDFs or /resources/data-sheets/<slug> pages,
+    which link to the PDF (usually .../data-sheets/pdf/<slug>.pdf).
+    """
+    session = requests.Session()
+    session.headers["User-Agent"] = USER_AGENT
+    found: dict[str, dict] = {}
+    for url in PRODUCT_PAGES:
+        print(f"Loading {url} ...", flush=True)
+        try:
+            page.goto(url, wait_until="domcontentloaded", timeout=60_000)
+            page.wait_for_timeout(4_000)
+        except Exception as e:
+            print(f"  warning: could not load ({e.__class__.__name__})", flush=True)
+            continue
+        links = page.evaluate(r"""
+            () => [...document.querySelectorAll('a[href]')].map(a => ({
+              href: a.href.split('#')[0].split('?')[0],
+              text: (a.innerText || '').trim()
+            })).filter(l => /\/content\/dam\/.*data-?sheets?.*\.pdf$/i.test(l.href)
+                         || /\/resources\/data-sheets\/[^\/]+$/i.test(l.href))
+        """)
+        for l in links:
+            href = l["href"]
+            if href.lower().endswith(".pdf"):
+                pdf = href
+            else:
+                pdf = resolve_slug_page(session, href)
+                if not pdf:
+                    print(f"  could not resolve {href}", flush=True)
+                    continue
+            key = filename_for(pdf).lower()
+            if key not in found:
+                slug = Path(urlparse(pdf).path).stem
+                found[key] = {
+                    "title": slug.replace("-", " ").replace("_", " ").title()
+                             .replace("Fortigate", "FortiGate").replace("Fortiwifi", "FortiWiFi")
+                             + " Data Sheet",
+                    "url": pdf,
+                    "last_updated": None,
+                }
+    return list(found.values())
+
+
+def resolve_slug_page(session: requests.Session, url: str) -> str | None:
+    """Find the PDF behind a /resources/data-sheets/<slug> page."""
+    try:
+        r = session.get(url, timeout=30)
+        if r.ok:
+            m = PDF_HREF_RE.search(r.text)
+            if m:
+                return urljoin(BASE, m.group(1).split("#")[0])
+    except Exception:
+        pass
+    # Fall back to the two known PDF locations.
+    slug = url.rstrip("/").rsplit("/", 1)[-1]
+    for guess in (f"{BASE}/content/dam/fortinet/assets/data-sheets/pdf/{slug}.pdf",
+                  f"{BASE}/content/dam/fortinet/assets/data-sheets/{slug}.pdf"):
+        try:
+            if session.head(guess, timeout=20, allow_redirects=True).ok:
+                return guess
+        except Exception:
+            pass
+    return None
 
 
 def parse_card(r: dict) -> dict:
