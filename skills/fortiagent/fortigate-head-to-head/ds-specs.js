@@ -4,7 +4,8 @@
  * Fetches ds-grabber model data, resolves the model names the user typed, sorts
  * them smallest to largest (hardware by model number, then VMs), and
  * prints one JSON document. With --report it also writes the HTML report from
- * the skill template, with the full records embedded, so nothing is retyped.
+ * the skill template (local copy, or downloaded from the repo), with the full
+ * records embedded, so nothing is retyped.
  * Writes only the --report file, in the current folder. Never prints credentials.
  *
  * Usage:
@@ -14,7 +15,8 @@
  *   node ds-specs.js --data ds-models.json 90G 120G      (local file saved by curl -o)
  *
  * Output:
- *   { "source", "resolved": [ { model, model_id, form_factor, spec_url, specs } ],
+ *   { "version", "source", "resolved": [ { model, model_id, form_factor, spec_url, specs } ],
+ *     "table": "<markdown table for chat>", "datasheet_links": [ ... ], "vm_note"?,
  *     "unresolved": [ { "query", "candidates": [ "FortiGate 50G/51G (FG-50G/51G)", ... ] } ],
  *     "report": "<file name>", "report_path": "<absolute path>" (only with --report) }
  *   On failure: { "error": "..." } and exit code 1.
@@ -26,7 +28,9 @@ var fs = require('fs');
 var path = require('path');
 
 var BASE = 'https://raw.githubusercontent.com/jclark1978/ds-grabber/main/';
+var VERSION = 3;
 var TEMPLATE = 'fortigate-head-to-head-template.html';
+var TEMPLATE_URL = BASE + 'skills/fortiagent/fortigate-head-to-head/' + TEMPLATE;
 var FIELDS = [
   'threat_protection_throughput_mbps', 'ngfw_throughput_mbps', 'ips_throughput_mbps',
   'ssl_inspection_throughput_mbps', 'fw_throughput_1518_mbps', 'fw_throughput_64_mbps',
@@ -35,13 +39,13 @@ var FIELDS = [
 ];
 var FAMILY = { FG: 'FortiGate', FWF: 'FortiWiFi', FGR: 'FortiGate Rugged' };
 
-function get(url, hops) {
+function get(url, hops, asText) {
   hops = hops || 0;
   return new Promise(function (resolve, reject) {
     https.get(url, { headers: { 'User-Agent': 'ds-specs' } }, function (res) {
       if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location && hops < 5) {
         res.resume();
-        return resolve(get(res.headers.location, hops + 1));
+        return resolve(get(res.headers.location, hops + 1, asText));
       }
       if (res.statusCode !== 200) {
         res.resume();
@@ -54,6 +58,7 @@ function get(url, hops) {
       res.setEncoding('utf8');
       res.on('data', function (c) { body += c; });
       res.on('end', function () {
+        if (asText) return resolve(body);
         try { resolve(JSON.parse(body)); } catch (err) { reject(new Error('not JSON: ' + url)); }
       });
     }).on('error', reject);
@@ -153,13 +158,18 @@ function bySize(a, b) {
   return 0;
 }
 
-function writeReport(out, records) {
+// Template: a local copy (chat folder, then next to this script) or, if none,
+// the published copy in the ds-grabber repo. Nothing is written except the report.
+function loadTemplate() {
   var here = path.dirname(process.argv[1]);
-  var tpl = [path.join(process.cwd(), TEMPLATE), path.join(here, TEMPLATE)].filter(function (p) {
+  var local = [path.join(process.cwd(), TEMPLATE), path.join(here, TEMPLATE)].filter(function (p) {
     return fs.existsSync(p);
   })[0];
-  if (!tpl) throw new Error(TEMPLATE + ' not found next to ds-specs.js or in the current folder');
-  var html = fs.readFileSync(tpl, 'utf8');
+  if (local) return Promise.resolve(fs.readFileSync(local, 'utf8'));
+  return get(TEMPLATE_URL, 0, true);
+}
+
+function writeReport(out, records, html) {
   var re = /<script id="compare-data" type="application\/json">[\s\S]*?<\/script>/;
   if (!re.test(html)) throw new Error('template is missing the compare-data block');
   var payload = JSON.stringify({ models: records.map(function (r) { return r.model_id; }), records: records })
@@ -167,6 +177,61 @@ function writeReport(out, records) {
   var block = '<script id="compare-data" type="application/json">' + payload + '</script>';
   fs.writeFileSync(path.basename(out), html.replace(re, function () { return block; }), 'utf8');
   return path.basename(out);
+}
+
+// Chat table, built here so the agent pastes it instead of formatting 60 values.
+var ROWS = [
+  ['threat_protection_throughput_mbps', 'Threat Protection Throughput', 'mbps', 1],
+  ['ngfw_throughput_mbps', 'NGFW Throughput', 'mbps', 1],
+  ['ips_throughput_mbps', 'IPS Throughput', 'mbps', 1],
+  ['ssl_inspection_throughput_mbps', 'SSL Inspection Throughput', 'mbps', 1],
+  ['fw_throughput_1518_mbps', 'Firewall Throughput 1518 B UDP', 'mbps', 1],
+  ['fw_throughput_64_mbps', 'Firewall Throughput 64 B UDP', 'mbps', 1],
+  ['concurrent_sessions', 'Concurrent Sessions', 'count', 1],
+  ['new_sessions_per_sec', 'New Sessions/Sec', 'count', 1],
+  ['firewall_policies', 'Firewall Policies', 'count', 1],
+  ['ipsec_throughput_mbps', 'IPsec VPN Throughput', 'mbps', 1],
+  ['ipsec_tunnels_g2g', 'Site-to-Site IPsec Tunnels', 'count', 1],
+  ['ipsec_tunnels_c2g', 'Client-to-Site IPsec Tunnels', 'count', 1],
+  ['vdoms_max', 'VDOMs Max', 'count', 1],
+  ['max_fortiswitches', 'Max FortiSwitches', 'count', 1],
+  ['max_fortiaps_total', 'Max FortiAPs', 'count', 1]
+];
+function fmtNum(v) { return Number(v).toLocaleString('en-US', { maximumFractionDigits: 2 }); }
+function fmtVal(v, kind) {
+  if (kind === 'mbps') return v >= 1000 ? fmtNum(v / 1000) + ' Gbps' : fmtNum(v) + ' Mbps';
+  return fmtNum(v);
+}
+function shortName(r) { return String(r.model).replace(/^FortiGate\s+Rugged\s+/, 'Rugged ').replace(/^FortiGate\s+/, ''); }
+function buildTable(recs) {
+  var two = recs.length === 2;
+  var head = ['Spec'].concat(recs.map(function (r) { return r.model; }));
+  if (two) head.push(shortName(recs[1]) + ' vs ' + shortName(recs[0]));
+  var lines = ['| ' + head.join(' | ') + ' |', '|' + head.map(function () { return '---|'; }).join('')];
+  ROWS.forEach(function (row) {
+    var key = row[0], label = row[1], kind = row[2], dir = row[3];
+    if (!recs.some(function (r) { return r.specs && r.specs[key]; })) return;
+    var cells = recs.map(function (r) {
+      var sp = r.specs && r.specs[key];
+      if (!sp) return { t: 'not listed', v: null };
+      if (typeof sp.value !== 'number') return { t: sp.raw || 'N/A', v: null };
+      return { t: fmtVal(sp.value, kind), v: sp.value };
+    });
+    var vals = cells.map(function (c) { return c.v; }).filter(function (v) { return v !== null; });
+    var distinct = vals.filter(function (v, i) { return vals.indexOf(v) === i; });
+    var best = vals.length > 1 && distinct.length > 1 ? (dir > 0 ? Math.max.apply(null, vals) : Math.min.apply(null, vals)) : null;
+    var out = [label].concat(cells.map(function (c) { return best !== null && c.v === best ? '**' + c.t + '**' : c.t; }));
+    if (two) {
+      var a = cells[0].v, b = cells[1].v, d = '';
+      if (a !== null && b !== null && a !== 0) {
+        var pct = (b - a) / a * 100;
+        d = a === b ? 'Same' : (b > a ? '+' : '') + (Math.abs(pct) < 1 ? pct.toFixed(1) : Math.round(pct)) + '%';
+      }
+      out.push(d);
+    }
+    lines.push('| ' + out.join(' | ') + ' |');
+  });
+  return lines.join('\n');
 }
 
 function main() {
@@ -195,6 +260,7 @@ function main() {
     return Promise.all(resolved.map(record)).then(function (recs) {
       recs.sort(bySize);
       var out = {
+        version: VERSION,
         source: src.source,
         resolved: recs.map(function (r) {
           var specs = {};
@@ -204,20 +270,32 @@ function main() {
         }),
         unresolved: unresolved
       };
-      if (report) {
-        if (unresolved.length) out.report_skipped = 'resolve every model before building the report';
-        else {
+      if (recs.length) {
+        out.table = buildTable(recs);
+        out.datasheet_links = recs.map(function (r) {
+          return r.model + ' datasheet: ' + ((r.source && (r.source.spec_url || r.source.url)) || 'not listed');
+        });
+        if (recs.some(function (r) { return r.form_factor === 'vm'; }) && recs.some(function (r) { return r.form_factor !== 'vm'; })) {
+          out.vm_note = 'The FortiGate VM datasheet lists capacity only, not throughput.';
+        }
+      }
+      if (!report) { process.stdout.write(JSON.stringify(out, null, 1) + '\n'); return; }
+      if (unresolved.length) {
+        out.report_skipped = 'resolve every model before building the report';
+        process.stdout.write(JSON.stringify(out, null, 1) + '\n');
+        return;
+      }
+      return loadTemplate().then(function (html) {
           if (report === 'auto') {
             var d = new Date(), pad = function (n) { return (n < 10 ? '0' : '') + n; };
             report = 'fortigate-head-to-head-' + recs.map(function (r) {
               return String(r.model_id).replace(/[^A-Za-z0-9]+/g, '');
             }).join('-vs-') + '-' + d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + '.html';
           }
-          out.report = writeReport(report, recs);
+          out.report = writeReport(report, recs, html);
           out.report_path = path.resolve(out.report);
-        }
-      }
-      process.stdout.write(JSON.stringify(out, null, 1) + '\n');
+        process.stdout.write(JSON.stringify(out, null, 1) + '\n');
+      });
     });
   });
 }
