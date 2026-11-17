@@ -110,13 +110,17 @@ The GitHub Action runs it after every download, and again whenever `labels.yaml`
 
 ## FortiGate Head-to-Head skill
 
-`skills/fortigate-head-to-head/` is the Claude version and `skills/fortiagent/fortigate-head-to-head/` the FortiAgent version of an agent skill that answers
-"compare the 90G and 120G" with a table in chat and builds a Fortinet-branded side-by-side report.
+`skills/fortigate-head-to-head/` is the Claude version and `skills/fortiagent/fortigate-head-to-head/` the FortiAgent version (both v1.1.0) of an agent skill that compares FortiGate models with each other or with Palo Alto PA-Series, Cisco Secure Firewall (FTD/ASA) and Meraki MX (data from `palo-ds-grabber` and `cisco-ds-grabber`), finds the closest competitor or FortiGate, filters on port requirements, and builds a Fortinet-branded side-by-side report.
+
+Both versions use the same helper, `ds-specs.js` (Node, no dependencies):
 
 ```bash
-python skills/fortigate-head-to-head/scripts/compare.py table 90G 120G
-python skills/fortigate-head-to-head/scripts/compare.py report 90G 120G
+node skills/fortigate-head-to-head/scripts/ds-specs.js --report auto 90G 120G
+node skills/fortigate-head-to-head/scripts/ds-specs.js --report auto 120G PA-3410 "Firepower 1150"
+node skills/fortigate-head-to-head/scripts/ds-specs.js --match auto --min-ports 10G:6 --report auto MX450
 ```
+
+The FortiAgent version downloads the helper from the pinned branch `fortiagent-h2h-v1.2.0`; do not push to that branch.
 
 The Action also writes `data/index.json` and `data/models/<id>.json` so the skill fetches only the models it needs.
 The report template (`fortigate-head-to-head-template.html`) renders from one JSON block: either model ids (loaded live from this repo) or embedded records (offline snapshot). It also accepts `?models=FG-90G,FG-120G`.

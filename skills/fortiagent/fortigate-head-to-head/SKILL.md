@@ -23,7 +23,7 @@ ftnt-ai-agent:
     - sizing
     - html
 ---
-Version 1.2.0. Compare FortiGate models with each other or with Palo Alto, Cisco Secure Firewall (FTD) and Meraki MX models from datasheet data: every run posts a table in chat and writes an HTML side-by-side report with a button to open it. Everything is read-only. This skill is self-contained: it loads no other skill.
+Version 1.1.0. Compare FortiGate models with each other or with Palo Alto, Cisco Secure Firewall (FTD) and Meraki MX models from datasheet data: every run posts a table in chat and writes an HTML side-by-side report with a button to open it. Everything is read-only. This skill is self-contained: it loads no other skill.
 
 ## Data source
 All specs come from three projects that extract them from official datasheets every week. The skill's helper `ds-specs.js` does every fetch, match and size pick; never fetch or parse the data any other way.
