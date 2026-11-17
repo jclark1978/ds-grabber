@@ -207,7 +207,8 @@ ul.tight li{margin-bottom:4px}
     return colgroup(models.length,two)+'<thead><tr><th>Specification</th>'+models.map(function(m){return '<th>'+esc(m.model)+'</th>';}).join('')+
       (two?'<th>'+esc(short(models[1]))+' vs '+esc(short(models[0]))+'</th>':'')+'</tr></thead>';
   }
-  function short(m){ return m.model.replace(/^FortiGate\s+/,''); }
+  // Title/short name: drop the FortiGate family word (the eyebrow already says it); keep FortiWiFi and Rugged.
+  function short(m){ return m.model.replace(/^FortiGate\s+Rugged\s+/,'Rugged ').replace(/^FortiGate\s+/,''); }
 
   function specRows(models,rows){
     var two=models.length===2, out='';
@@ -251,8 +252,9 @@ ul.tight li{margin-bottom:4px}
   function render(res){
     var models=res.models;
     var names=models.map(function(m){return m.model;});
-    document.title=names.join(' vs ')+' | FortiGate Head-to-Head';
-    document.getElementById('title').textContent=names.join(' vs ');
+    var shortNames=models.map(short);
+    document.title=shortNames.join(' vs ')+' | FortiGate Head-to-Head';
+    document.getElementById('title').textContent=shortNames.join(' vs ');
     document.getElementById('subtitle').textContent='Specifications from Fortinet datasheets. All performance values are "up to" and vary with system configuration.';
 
     var h='<div class="toolbar"><h2>Side-by-Side</h2><span class="tbtns">'+
