@@ -67,14 +67,16 @@ The command in Step 0 already wrote it; never build or edit it any other way.
 
 ## Opening the report (every attended run)
 End every reply that wrote a report by asking whether to open it, with the `question` tool:
-- Question: "Open the Fortinet-formatted side-by-side report in your browser?"
-- Options: "Yes, open it" and "Not now".
+- Question: "Open the full Fortinet-formatted side-by-side report in your browser? It has more detail than the table above."
+- Options, each with its description:
+  - "Yes, open it" - description: "Every spec, plus hardware, ports, power, test-condition footnotes and datasheet links. Print to PDF or export to CSV."
+  - "Not now" - description: "The report stays saved in this chat's folder."
 - "Yes, open it": open `report_path` from this run with the platform's opener in a ```bash block: `open <path>` on macOS, `start "" <path>` on Windows, `xdg-open <path>` on Linux. The shell call may ask for approval; a refusal is final, so report it and give the path again as a clickable inline link. Only ever open a local file written by this skill.
 - "Not now", or the user dismisses the question: reply in one line with the file name so they can open it later. Do not ask again.
 - If the question tool is unavailable, end the reply instead with exactly the block below; when the user clicks it, the line is sent verbatim, so treat it like "Yes, open it":
 
 <FollowUp>
-📄 Open the Fortinet report in my browser
+📄 Open the full Fortinet report (every spec, footnotes, PDF/CSV)
 </FollowUp>
 
 - Never ask or show the button when the run wrote no report (a model is still unresolved, or the fetch failed), or when the reply goes somewhere without interactive elements (a channel send).
