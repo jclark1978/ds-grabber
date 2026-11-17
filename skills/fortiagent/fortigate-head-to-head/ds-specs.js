@@ -31,8 +31,8 @@ var https = require('https');
 var fs = require('fs');
 var path = require('path');
 
-var VERSION = '1.2.0';
-// Pinned to this version's tag so the template always matches the helper.
+var VERSION = '1.1.0';
+// Pinned to this version's branch so the template always matches the helper.
 var TEMPLATE_URL = 'https://raw.githubusercontent.com/jclark1978/ds-grabber/fortiagent-h2h-v1.2.0/skills/fortiagent/fortigate-head-to-head/fortigate-head-to-head-template.html';
 var MIN_PORTS = []; // [{ speed: 10, count: 6, label: '10G' }] from --min-ports 10G:6
 var BASES = {
