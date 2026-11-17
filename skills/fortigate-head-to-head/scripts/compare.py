@@ -19,7 +19,7 @@ from pathlib import Path
 
 DATA_BASE = "https://raw.githubusercontent.com/jclark1978/ds-grabber/main/"
 HERE = Path(__file__).resolve().parent
-TEMPLATE = HERE.parent / "fortigate-compare-template.html"
+TEMPLATE = HERE.parent / "fortigate-head-to-head-template.html"
 
 # (field, label, kind, direction) direction: 1 higher is better, -1 lower is better
 TABLE_ROWS = [
@@ -194,7 +194,7 @@ def main() -> int:
         print(table(models))
     else:
         ids = "-vs-".join(re.sub(r"[^A-Za-z0-9]+", "", m["model_id"]) for m in models)
-        out = Path(a.out or f"fortigate-comparison-{ids}.html")
+        out = Path(a.out or f"fortigate-head-to-head-{ids}.html")
         print(report(models, out))
     return 0
 

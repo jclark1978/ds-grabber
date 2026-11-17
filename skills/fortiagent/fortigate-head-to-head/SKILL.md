@@ -1,9 +1,9 @@
 ---
-name: FortiGate Compare
+name: FortiGate Head-to-Head
 description: Side-by-side comparison of 2 to 4 FortiGate, FortiWiFi or FortiGate
   Rugged models (hardware and VM) from official Fortinet datasheet data, shown
   as a table in chat, with an optional HTML report rendered from the skill's own
-  fortigate-compare-template.html. Use when the user says "compare the 90G and
+  fortigate-head-to-head-template.html. Use when the user says "compare the 90G and
   120G", "90G vs 120G", "show me a side-by-side of the 400F and 700G", or asks
   which FortiGate model has more of a given spec.
 ftnt-ai-agent:
@@ -64,10 +64,10 @@ Build the side-by-side report
 Omit it when the comparison could not be built.
 
 ## Step 3: HTML report (when asked)
-Copy the skill's own template `skill:fortigate-compare/fortigate-compare-template.html` and modify ONLY the JSON inside `<script id="compare-data" type="application/json">`. Never edit the template's HTML, CSS, or JavaScript; same layout every run.
+Copy the skill's own template `skill:fortigate-head-to-head/fortigate-head-to-head-template.html` and modify ONLY the JSON inside `<script id="compare-data" type="application/json">`. Never edit the template's HTML, CSS, or JavaScript; same layout every run.
 - Replace the sample JSON entirely with: `{"models": ["<model_id>", "<model_id>"], "records": []}` using the resolved `model_id` values in display order. Keep the field names exactly.
 - The page loads each model's record from the ds-grabber data when it opens, formats every value, and adds footnotes, datasheet links, Expand/Collapse, Export CSV and Print / Save PDF. Opening it needs internet access.
-- Output file name: `fortigate-comparison-<ID1>-vs-<ID2>[-vs-...]-YYYY-MM-DD.html` with non-alphanumeric characters removed from each id (FG-90G becomes FG90G). Write it into the session working directory.
+- Output file name: `fortigate-head-to-head-<ID1>-vs-<ID2>[-vs-...]-YYYY-MM-DD.html` with non-alphanumeric characters removed from each id (FG-90G becomes FG90G). Write it into the session working directory.
 
 ## Chat summary for the report
 Alongside the file, post a 1 to 2 line summary: which models it covers and where the file is. The file carries the detail; the chat does not repeat the table.

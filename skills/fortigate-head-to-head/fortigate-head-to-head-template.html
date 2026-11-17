@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FortiGate Comparison</title>
+<title>FortiGate Head-to-Head</title>
 <!--
-  FORTIGATE COMPARE TEMPLATE v1.0
+  FORTIGATE HEAD-TO-HEAD TEMPLATE v1.0
   DO NOT EDIT ANYTHING IN THIS FILE EXCEPT THE JSON INSIDE <script id="compare-data">.
   The page renders entirely from that JSON. Same layout every run.
 -->
@@ -88,7 +88,7 @@ ul.tight li{margin-bottom:4px}
 <body>
 <div class="page">
   <header class="hdr">
-    <p class="eyebrow">FortiGate Comparison</p>
+    <p class="eyebrow">FortiGate Head-to-Head</p>
     <h1 id="title">Side-by-Side Comparison</h1>
     <p class="sub" id="subtitle">Loading datasheet data...</p>
   </header>
@@ -251,7 +251,7 @@ ul.tight li{margin-bottom:4px}
   function render(res){
     var models=res.models;
     var names=models.map(function(m){return m.model;});
-    document.title=names.join(' vs ')+' | FortiGate Comparison';
+    document.title=names.join(' vs ')+' | FortiGate Head-to-Head';
     document.getElementById('title').textContent=names.join(' vs ');
     document.getElementById('subtitle').textContent='Specifications from Fortinet datasheets. All performance values are "up to" and vary with system configuration.';
 
@@ -286,7 +286,7 @@ ul.tight li{margin-bottom:4px}
 
     document.getElementById('main').innerHTML=h;
     var now=new Date();
-    document.getElementById('foot').textContent='FortiGate Compare · Template v1.0 · '+(res.live?'Data loaded live from ds-grabber':'Embedded data snapshot')+' · Generated '+now.toISOString().slice(0,16).replace('T',' ');
+    document.getElementById('foot').textContent='FortiGate Head-to-Head · Template v1.0 · '+(res.live?'Data loaded live from ds-grabber':'Embedded data snapshot')+' · Generated '+now.toISOString().slice(0,16).replace('T',' ');
     window.__models=models;
   }
 
@@ -298,7 +298,7 @@ ul.tight li{margin-bottom:4px}
     });});
     rows.push(['Datasheet'].concat(models.map(function(m){return m.source.spec_url||m.source.url;})));
     var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c==null?'':c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
-    var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='fortigate-comparison.csv'; a.click();
+    var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='fortigate-head-to-head.csv'; a.click();
   }
 
   document.addEventListener('click',function(e){

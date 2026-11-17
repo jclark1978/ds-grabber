@@ -1,9 +1,9 @@
 ---
-name: fortigate-compare
+name: fortigate-head-to-head
 description: Side-by-side comparison of FortiGate models (hardware and VM) from official Fortinet datasheet data, with an optional Fortinet-branded comparison report. Use when asked to compare FortiGate, FortiWiFi or FortiGate Rugged models, e.g. "compare the 90G and 120G", "90G vs 120G", "side-by-side of the 400F and 700G", "which has more threat protection throughput".
 ---
 
-# FortiGate side-by-side comparison
+# FortiGate Head-to-Head
 
 Compares 2 to 4 FortiGate models using spec data extracted from Fortinet's
 official datasheets by the ds-grabber project, shows the comparison as a table
@@ -32,9 +32,9 @@ Base URL: `https://raw.githubusercontent.com/jclark1978/ds-grabber/main/`
 | `data/index.json` | Every model: `model_id`, `family`, `codes` (bare model codes), `file`, `spec_url` |
 | `data/models/<id>.json` | Full record for one model (about 8 KB) |
 
-Bundled files (`scripts/compare.py`, `fortigate-compare-template.html`) sit next to this
+Bundled files (`scripts/compare.py`, `fortigate-head-to-head-template.html`) sit next to this
 SKILL.md. If they are missing, download them from the same base URL under
-`skills/fortigate-compare/`. If raw GitHub is blocked in your environment,
+`skills/fortigate-head-to-head/`. If raw GitHub is blocked in your environment,
 clone the public repo `jclark1978/ds-grabber` and pass `--data <clone path>`
 to the script.
 
@@ -90,10 +90,10 @@ End with: "Want the side-by-side report?"
 Preferred:
 
 ```bash
-python scripts/compare.py report 90G 120G -o fortigate-comparison-90G-vs-120G.html
+python scripts/compare.py report 90G 120G -o fortigate-head-to-head-90G-vs-120G.html
 ```
 
-Without code: copy `fortigate-compare-template.html` and change ONLY the JSON
+Without code: copy `fortigate-head-to-head-template.html` and change ONLY the JSON
 inside `<script id="compare-data" type="application/json">` to
 `{"models": ["FG-90G", "FG-120G"], "records": []}` (resolved `model_id` values).
 The page loads the records itself when opened. The script instead embeds the
