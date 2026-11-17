@@ -1,0 +1,44 @@
+OK     fortigate-1000f-series.pdf                 pages=[8] rows= 56 mapped= 85% models=2
+OK     fortigate-120g-series.pdf                  pages=[8] rows= 52 mapped= 82% models=2
+OK     fortigate-1800f-series.pdf                 pages=[8] rows= 58 mapped= 82% models=2
+OK     fortigate-200g-series.pdf                  pages=[8] rows= 55 mapped= 83% models=2
+OK     fortigate-2200e-series.pdf                 pages=[8] rows= 52 mapped= 86% models=2
+OK     fortigate-2600f-series.pdf                 pages=[8] rows= 58 mapped= 82% models=2
+OK     fortigate-3000f-series.pdf                 pages=[8] rows= 56 mapped= 82% models=2
+OK     fortigate-3000g-series.pdf                 pages=[8] rows= 56 mapped= 83% models=2
+OK     fortigate-3200f-series.pdf                 pages=[8] rows= 56 mapped= 85% models=2
+OK     fortigate-3300e-series.pdf                 pages=[8] rows= 53 mapped= 86% models=2
+OK     fortigate-3500f-series.pdf                 pages=[8] rows= 53 mapped= 84% models=2
+OK     fortigate-3500g-series.pdf                 pages=[8] rows= 56 mapped= 83% models=2
+OK     fortigate-3700f-series.pdf                 pages=[8] rows= 55 mapped= 85% models=2
+OK     fortigate-3800g-series.pdf                 pages=[8] rows= 59 mapped= 79% models=2
+OK     fortigate-400f-series.pdf                  pages=[8] rows= 57 mapped= 82% models=2
+OK     fortigate-400g-series.pdf                  pages=[8] rows= 56 mapped= 85% models=2
+OK     fortigate-4200f-series.pdf                 pages=[8] rows= 59 mapped= 81% models=2
+OK     fortigate-4400f-series.pdf                 pages=[8] rows= 59 mapped= 81% models=2
+OK     fortigate-4800f-series.pdf                 pages=[9, 10] rows= 58 mapped= 81% models=3
+OK     fortigate-7000f-series.pdf                 pages=[9, 10, 11] rows= 56 mapped= 85% models=2
+OK     fortigate-700g-series.pdf                  pages=[8] rows= 56 mapped= 85% models=2
+OK     fortigate-70f-series.pdf                   pages=[8] rows= 48 mapped= 83% models=1
+OK     fortigate-7121f.pdf                        pages=[9, 10, 11] rows= 56 mapped= 85% models=2
+OK     fortigate-900g-series.pdf                  pages=[8] rows= 58 mapped= 82% models=2
+OK     fortigate-90g-series.pdf                   pages=[8] rows= 51 mapped= 78% models=2
+OK     fortigate-fortiwifi-30g-series.pdf         pages=[9, 10] rows=106 mapped= 81% models=4
+OK     fortigate-fortiwifi-40f-series.pdf         pages=[8, 9] rows= 72 mapped= 63% models=2
+OK     fortigate-fortiwifi-50g-series.pdf         pages=[12, 13, 14, 15, 16] rows=242 mapped= 73% models=9
+OK     fortigate-fortiwifi-60f-series.pdf         pages=[8, 9] rows= 54 mapped= 75% models=2
+OK     fortigate-fortiwifi-70g-series.pdf         pages=[10, 11, 12, 13] rows=106 mapped= 81% models=7
+OK     fortigate-fortiwifi-80f-series.pdf         pages=[9, 10] rows= 61 mapped= 72% models=5
+CHECK  fortigate-vm.pdf                           pages=[7] rows=  8 mapped=100% models=7  <- only 8 rows extracted
+OK     FortiGate_2500E.pdf                        pages=[8] rows= 49 mapped= 87% models=1
+CHECK  FortiGate_7000_Series_Bundle.pdf           pages=[8] rows= 14 mapped= 50% models=3  <- only 14 rows extracted
+OK     FortiGate_80E_Series.pdf                   pages=[5, 6] rows= 54 mapped= 72% models=2
+OK     FortiGate_FortiWiFi_30E.pdf                pages=[5] rows= 47 mapped= 74% models=1
+OK     FortiGate_FortiWiFi_60E_Series.pdf         pages=[8, 9] rows= 54 mapped= 75% models=2
+OK     FortiGate_Rugged_Series.pdf                pages=[12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28] rows=417 mapped= 54% models=12
+
+Models found in more than one datasheet (first file used):
+  FG-60F: FortiGate_FortiWiFi_60E_Series.pdf, fortigate-fortiwifi-60f-series.pdf
+  FG-61F: FortiGate_FortiWiFi_60E_Series.pdf, fortigate-fortiwifi-60f-series.pdf
+  FG-7121F: fortigate-7000f-series.pdf, fortigate-7121f.pdf
+  FG-7121F-2-DC: fortigate-7000f-series.pdf, fortigate-7121f.pdf

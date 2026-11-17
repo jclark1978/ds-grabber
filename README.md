@@ -47,6 +47,62 @@ Options:
 
 `.github/workflows/grab.yml` runs every Monday and commits any changes. You can also run it by hand from the **Actions** tab, with a custom filter or a forced re-download.
 
+## JSON conversion
+
+`ds_normalize.py` reads every downloaded datasheet and writes one record per model:
+
+| File | What it is |
+|---|---|
+| `data/models.json` | All models (hardware and VM) in one schema, for comparison tools and AI |
+| `data/models.csv` | Flat table of the main comparison fields |
+| `reports/extraction.txt` | Per-datasheet rows extracted, % mapped, problems, duplicate models |
+| `reports/unmapped_labels.txt` | Spec labels not yet in `labels.yaml` (kept under `other`, never dropped) |
+
+```bash
+python ds_normalize.py --check
+```
+
+The GitHub Action runs it after every download, and again whenever `labels.yaml` or the parser changes.
+
+### Record layout
+
+```json
+{
+  "model": "FortiGate 120G",
+  "model_id": "FG-120G",
+  "form_factor": "appliance",
+  "source": {
+    "url": "https://www.fortinet.com/.../fortigate-120g-series.pdf",
+    "spec_url": "https://www.fortinet.com/.../fortigate-120g-series.pdf#page=8"
+  },
+  "specs": {
+    "ngfw_throughput_mbps": { "value": 3100, "raw": "3.1 Gbps", "label": "NGFW Throughput", "notes": ["2", "4"] }
+  },
+  "hardware": { "rack_units": 1, "power_max_w": 40.0, "interfaces": [ ... ] },
+  "vm": null,
+  "footnotes": { "4": "NGFW performance is measured with Firewall, IPS and Application Control enabled." },
+  "other": { "Humidity": "20% to 90% non-condensing" }
+}
+```
+
+- `specs` holds the fields hardware and VMs share. `value` is normalized (throughput in Mbps, counts as plain numbers); `raw` is exactly as printed.
+- `notes` point to `footnotes`, the test conditions behind a number.
+- `spec_url` opens the original PDF on the spec page.
+- `hardware` is `null` for VMs; `vm` is `null` for hardware.
+
+### Maintaining the label map
+
+`labels.yaml` maps each datasheet label wording to a standard field. When Fortinet introduces a new wording it shows up in `reports/unmapped_labels.txt`; add a pattern to `labels.yaml` and push. The Action regenerates the JSON.
+
+### Coverage notes
+
+- **VMs:** capacity only (vCPU, policies, VDOMs, APs, FortiSwitches) from the FortiGate Virtual Appliances datasheet. The per-platform VM datasheets (AWS, Azure, ESXi, ...) are downloaded but excluded from the JSON.
+- **Excluded:** service datasheets (FortiGate-as-a-Service, Managed FortiGate, FortiGate Cloud, VMX) and the 1200G file, which is a product brochure with no spec table.
+- **Fortinet URL quirks:** the 70F link serves the 71F datasheet, and the 60E link serves the 60F datasheet. `fortigate-7000f-series.pdf` and `fortigate-7121f.pdf` are the same document.
+- **FortiWiFi 40F/60F/80F** are not in the current datasheets, so they are not in the JSON.
+- **FortiGate 7000E bundle:** only dimensions and power extract; its performance figures are not on the spec page.
+- Combined columns such as `FG-50G/51G` or `FG-1800F/-DC` stay as one record, the way the datasheet prints them.
+
 ## Known limits
 
 - This scrapes the public library page. If Fortinet changes the page layout, discovery may return 0 results. When that happens the script exits with an error rather than wiping anything.

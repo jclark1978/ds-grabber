@@ -1,0 +1,185 @@
+# Maps datasheet spec labels to standard fields.
+#
+# Each field lists regex patterns (case-insensitive, matched against the
+# label after footnote markers are stripped). First match wins, top to bottom.
+#
+# parse types:
+#   mbps       one throughput value -> Mbps            "21.8 Gbps" -> 21800
+#   mbps_3     three throughputs (1518/512/64 byte)   "39 / 39 / 28 Gbps"
+#   count      one number                              "24 Million" -> 24000000
+#   pair       two numbers "a / b" -> fields[0], fields[1]
+#   us         microseconds                            "3.17 μs" -> 3.17
+#   pps        packets per second                      "42 Mpps" -> 42000000
+#   watts_pair "38 W / 40 W" -> avg, max (order from the label)
+#   list       comma-separated text -> list
+#   bool       check mark / Yes -> true, "—" / No -> false
+#   text       kept as printed
+#
+# Labels that match nothing are kept under "other" on each model and listed
+# in reports/unmapped_labels.txt, so a new wording is never silently lost.
+
+performance:
+  ips_throughput_mbps:
+    parse: mbps
+    patterns: ['^IPS Throughput( \(Enterprise Mix\))?$']
+  ngfw_throughput_mbps:
+    parse: mbps
+    patterns: ['^NGFW Throughput']
+  threat_protection_throughput_mbps:
+    parse: mbps
+    patterns: ['^Threat Protection Throughput']
+  fw_throughput_ipv4:
+    parse: mbps_3
+    fields: [fw_throughput_1518_mbps, fw_throughput_512_mbps, fw_throughput_64_mbps]
+    patterns: ['^(IPv4 )?Firewall Throughput \(1518', '^Firewall Throughput$']
+  fw_throughput_ipv6:
+    parse: mbps_3
+    fields: [fw_ipv6_throughput_1518_mbps, fw_ipv6_throughput_512_mbps, fw_ipv6_throughput_small_mbps]
+    patterns: ['^IPv6 Firewall Throughput']
+  fw_latency_us:
+    parse: us
+    patterns: ['^Firewall Latency']
+  fw_pps:
+    parse: pps
+    patterns: ['^Firewall Throughput \(Packets? per Second\)']
+  concurrent_sessions:
+    parse: count
+    patterns: ['^Concurrent Sessions']
+  new_sessions_per_sec:
+    parse: count
+    patterns: ['^New Sessions/Sec']
+  firewall_policies:
+    parse: count
+    patterns: ['^Firewall Policies']
+  ipsec_throughput_mbps:
+    parse: mbps
+    patterns: ['^IPsec VPN Throughput']
+  ipsec_tunnels_g2g:
+    parse: count
+    patterns: ['^Gateway-to-Gateway IPsec']
+  ipsec_tunnels_c2g:
+    parse: count
+    patterns: ['^Client-to-Gateway IPsec']
+  ssl_vpn_throughput_mbps:
+    parse: mbps
+    patterns: ['^SSL-?VPN Throughput']
+  ssl_vpn_users:
+    parse: count
+    patterns: ['^Concurrent SSL-?VPN Users']
+  ssl_inspection_throughput_mbps:
+    parse: mbps
+    patterns: ['^SSL Inspection Throughput']
+  ssl_inspection_cps:
+    parse: count
+    patterns: ['^SSL Inspection CPS']
+  ssl_inspection_sessions:
+    parse: count
+    patterns: ['^SSL Inspection Concurrent Session']
+  app_control_throughput_mbps:
+    parse: mbps
+    patterns: ['^Application Control Throughput']
+  capwap_throughput_mbps:
+    parse: mbps
+    patterns: ['^CAPWAP Throughput']
+
+capacity:
+  vdoms:
+    parse: pair
+    fields: [vdoms_default, vdoms_max]
+    patterns: ['^Virtual Domains']
+  max_fortiswitches:
+    parse: count
+    patterns: ['^Maximum Number of FortiSwitches']
+  max_fortiaps:
+    parse: pair
+    fields: [max_fortiaps_total, max_fortiaps_tunnel]
+    patterns: ['^Maximum Number of FortiAPs']
+  max_fortiaps_vm:
+    parse: pair
+    fields: [max_fortiaps_tunnel, max_fortiaps_total]   # VM label order is Tunnel / Global
+    patterns: ['^Maximum Number of Wireless Access Points Controlled']
+  max_fortitokens:
+    parse: count
+    patterns: ['^Maximum Number of FortiTokens']
+  max_registered_endpoints:
+    parse: count
+    patterns: ['^Maximum Number of Registered (FortiClients|Endpoints)', '^Maximum Number of FortiClients']
+  ha_modes:
+    parse: list
+    patterns: ['^High Availability Configurations']
+
+hardware:
+  storage:
+    parse: text
+    patterns: ['^(Internal|Onboard) Storage', '^Storage Capacity']
+  tpm:
+    parse: bool
+    patterns: ['^Trusted Platform Module']
+  ble:
+    parse: bool
+    patterns: ['^Bluetooth Low Energy']
+  dimensions_mm:
+    parse: text
+    patterns: ['^Height x Width x Length \(mm\)']
+  weight:
+    parse: text
+    patterns: ['^Weight']
+  form_factor:
+    parse: text
+    patterns: ['^Form Factor']
+  power_consumption:
+    parse: watts_pair
+    patterns: ['^(AC )?Power Consumption']
+  heat_dissipation:
+    parse: text
+    patterns: ['^Heat Dissipation']
+  redundant_psu:
+    parse: text
+    patterns: ['^Redundant Power Supplies']
+  operating_temp:
+    parse: text
+    patterns: ['^Operating Temperature']
+  noise_level:
+    parse: text
+    patterns: ['^Noise Level']
+  airflow:
+    parse: text
+    patterns: ['^(Forced )?Air ?flow']
+  compliance:
+    parse: text
+    patterns: ['^Compliance', '^Regulatory Compliance']
+  certifications:
+    parse: text
+    patterns: ['^Certifications?$']
+  included_transceivers:
+    parse: text
+    patterns: ['^(Included Transceivers|Transceivers Included)']
+
+vm:
+  vcpu:
+    parse: pair
+    fields: [vcpu_min, vcpu_max]
+    patterns: ['^vCPU Support']
+  vm_storage:
+    parse: text
+    patterns: ['^Storage Support']
+  unlimited_users:
+    parse: bool
+    patterns: ['^Unlimited User License']
+
+# Rows in these sections whose label names ports or slots become entries in
+# hardware.interfaces as {count, type}.
+interface_sections: ['Hardware Specifications', 'Interfaces and Modules', 'Interfaces']
+interface_label_re: '(Port|Ports|Slot|Slots|Interface|Interfaces|Pairs?)\b'
+
+# Datasheets left out of models.json: services, the per-platform VM
+# performance sheets (look those up individually), and product brochures.
+exclude_files:
+  - fgaas.pdf
+  - FortiGate_Cloud.pdf
+  - managed-fortigate-svc.pdf
+  - FortiGate_VMX.pdf
+  - fg-4400f-intro.pdf
+  - fortigate-nstx.pdf
+  - fortigate-1200g-series.pdf      # product brochure, no spec table
+  - FortiGate_VM_*.pdf
