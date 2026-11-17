@@ -1,6 +1,6 @@
 ---
 name: fortigate-head-to-head
-description: Side-by-side comparison of FortiGate models (hardware and VM) from official Fortinet datasheet data, with an optional Fortinet-branded comparison report. Use when asked to compare FortiGate, FortiWiFi or FortiGate Rugged models, e.g. "compare the 90G and 120G", "90G vs 120G", "side-by-side of the 400F and 700G", "which has more threat protection throughput".
+description: Side-by-side comparison of FortiGate models (hardware and VM) from official Fortinet datasheet data, with a Fortinet-branded side-by-side report every time. Use when asked to compare FortiGate, FortiWiFi or FortiGate Rugged models, e.g. "compare the 90G and 120G", "90G vs 120G", "side-by-side of the 400F and 700G", "which has more threat protection throughput".
 ---
 
 # FortiGate Head-to-Head
