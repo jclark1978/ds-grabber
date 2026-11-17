@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 /* ds-specs.js - FortiGate Head-to-Head helper (Node 14+, no dependencies).
  *
- * Fetches ds-grabber model data, resolves the model names the user typed, and
+ * Fetches ds-grabber model data, resolves the model names the user typed, sorts
+ * them smallest to largest (hardware by model number, then VMs), and
  * prints one JSON document. With --report it also writes the HTML report from
  * the skill template, with the full records embedded, so nothing is retyped.
  * Writes only the --report file, in the current folder. Never prints credentials.
@@ -129,6 +130,24 @@ function record(entry) {
   return get(BASE + entry.file);
 }
 
+// Smallest to largest: hardware by model number (50G < 70G < 120G < 1800F),
+// generation letter as tiebreak, then VMs by size (VM01 ... VMUL).
+function sizeKey(r) {
+  var id = String(r.model_id || ''), parts = id.split('-'), prefix = parts.shift(), code = parts.join('-');
+  var famRank = { FG: 0, FWF: 1, FGR: 2 }[prefix];
+  if (/^VM/i.test(code)) {
+    var n = /UL/i.test(code) ? 99999 : parseInt((code.match(/\d+/) || ['0'])[0], 10);
+    return [1, n, 0, 0];
+  }
+  var m = code.match(/(\d+)([A-Z]?)/i) || [0, '0', ''];
+  return [0, parseInt(m[1], 10), (m[2] || '').toUpperCase().charCodeAt(0) || 0, famRank == null ? 9 : famRank];
+}
+function bySize(a, b) {
+  var x = sizeKey(a), y = sizeKey(b);
+  for (var i = 0; i < x.length; i++) if (x[i] !== y[i]) return x[i] - y[i];
+  return 0;
+}
+
 function writeReport(out, records) {
   var here = path.dirname(process.argv[1]);
   var tpl = [path.join(process.cwd(), TEMPLATE), path.join(here, TEMPLATE)].filter(function (p) {
@@ -169,6 +188,7 @@ function main() {
       unresolved.push({ query: q, candidates: cands.map(function (m) { return m.model + ' (' + m.model_id + ')'; }) });
     });
     return Promise.all(resolved.map(record)).then(function (recs) {
+      recs.sort(bySize);
       var out = {
         source: src.source,
         resolved: recs.map(function (r) {
