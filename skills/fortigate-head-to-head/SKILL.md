@@ -1,13 +1,13 @@
 ---
 name: fortigate-head-to-head
-description: Side-by-side comparison of FortiGate models (hardware and VM) from official Fortinet datasheet data, with an optional Fortinet-branded comparison report. Use when asked to compare FortiGate, FortiWiFi or FortiGate Rugged models, e.g. "compare the 90G and 120G", "90G vs 120G", "side-by-side of the 400F and 700G", "which has more threat protection throughput".
+description: Side-by-side comparison of FortiGate models (hardware and VM) from official Fortinet datasheet data, with a Fortinet-branded side-by-side report every time. Use when asked to compare FortiGate, FortiWiFi or FortiGate Rugged models, e.g. "compare the 90G and 120G", "90G vs 120G", "side-by-side of the 400F and 700G", "which has more threat protection throughput".
 ---
 
 # FortiGate Head-to-Head
 
 Compares 2 to 4 FortiGate models using spec data extracted from Fortinet's
 official datasheets by the ds-grabber project, shows the comparison as a table
-in chat, and offers a Fortinet-branded side-by-side report.
+in chat, and always delivers a Fortinet-branded side-by-side report with it.
 
 ## Rules
 
@@ -83,14 +83,14 @@ matter to a customer (for example, "the 120G has about 27% more threat
 protection throughput and twice the firewall policies"). Then list each
 model's datasheet link.
 
-End with: "Want the side-by-side report?"
+Then build the report (step 3) in the same turn, every time.
 
-### 3. Build the report (when asked)
+### 3. Build and deliver the report (every run)
 
 Preferred:
 
 ```bash
-python scripts/compare.py report 90G 120G -o fortigate-head-to-head-90G-vs-120G.html
+python scripts/compare.py report 90G 120G
 ```
 
 Without code: copy `fortigate-head-to-head-template.html` and change ONLY the JSON
@@ -99,7 +99,8 @@ inside `<script id="compare-data" type="application/json">` to
 The page loads the records itself when opened. The script instead embeds the
 full records as an offline snapshot.
 
-Deliver the HTML file. It has Fortinet branding, every spec section, the
+Deliver the HTML file with the table (send it as a file, rendered where the
+interface allows) and add one line naming it. It has Fortinet branding, every spec section, the
 footnotes with test conditions, datasheet links, Print / Save PDF and CSV
 export.
 

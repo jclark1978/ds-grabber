@@ -8,13 +8,14 @@
  *
  * Usage:
  *   node ds-specs.js 90G 120G
+ *   node ds-specs.js --report auto 90G 120G      (names the file from the models and today's date)
  *   node ds-specs.js --report fortigate-head-to-head-FG90G-vs-FG120G-2026-11-17.html 90G 120G
  *   node ds-specs.js --data ds-models.json 90G 120G      (local file saved by curl -o)
  *
  * Output:
  *   { "source", "resolved": [ { model, model_id, form_factor, spec_url, specs } ],
  *     "unresolved": [ { "query", "candidates": [ "FortiGate 50G/51G (FG-50G/51G)", ... ] } ],
- *     "report": "<file>" (only with --report) }
+ *     "report": "<file name>", "report_path": "<absolute path>" (only with --report) }
  *   On failure: { "error": "..." } and exit code 1.
  */
 'use strict';
@@ -154,7 +155,7 @@ function main() {
   }
   if (!queries.length) return fail('no models given. Usage: node ds-specs.js [--report <file.html>] 90G 120G');
   if (queries.length > 4) return fail('compare up to 4 models at a time');
-  if (report && !/\.html$/i.test(report)) return fail('--report needs a .html file name');
+  if (report && report !== 'auto' && !/\.html$/i.test(report)) return fail('--report needs "auto" or a .html file name');
 
   return loadSource(dataPath).then(function (src) {
     var resolved = [], unresolved = [];
@@ -180,7 +181,16 @@ function main() {
       };
       if (report) {
         if (unresolved.length) out.report_skipped = 'resolve every model before building the report';
-        else out.report = writeReport(report, recs);
+        else {
+          if (report === 'auto') {
+            var d = new Date(), pad = function (n) { return (n < 10 ? '0' : '') + n; };
+            report = 'fortigate-head-to-head-' + recs.map(function (r) {
+              return String(r.model_id).replace(/[^A-Za-z0-9]+/g, '');
+            }).join('-vs-') + '-' + d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) + '.html';
+          }
+          out.report = writeReport(report, recs);
+          out.report_path = path.resolve(out.report);
+        }
       }
       process.stdout.write(JSON.stringify(out, null, 1) + '\n');
     });
