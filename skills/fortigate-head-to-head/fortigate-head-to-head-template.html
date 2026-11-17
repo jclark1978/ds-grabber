@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FortiGate Head-to-Head</title>
+<!--
+  FORTIGATE HEAD-TO-HEAD TEMPLATE v1.0
+  DO NOT EDIT ANYTHING IN THIS FILE EXCEPT THE JSON INSIDE <script id="compare-data">.
+  The page renders entirely from that JSON. Same layout every run.
+-->
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+:root{
+  --red:#DA291C;--black:#000;--white:#FFF;--light:#F0F0F0;--green:#3CB17E;--blue:#307FE2;
+  --xdark:#464646;--dark:#646464;--med:#969696;--grey:#C8C8C8;
+  --red-t:#F8E4E2;--green-t:#E4F4ED;--blue-t:#E6EFFB;
+}
+*{box-sizing:border-box}
+body{font-family:'Inter','Segoe UI','Helvetica Neue',sans-serif;background:var(--white);color:var(--xdark);margin:0;font-size:15px;line-height:1.5}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+a.ext::after{content:" \2197";font-size:11px}
+.page{max-width:1040px;margin:0 auto;padding:32px 24px 72px}
+
+/* Header */
+.hdr{border-top:6px solid var(--red);padding-top:20px;margin-bottom:20px}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin:0 0 6px}
+h1{font-size:28px;font-weight:700;color:var(--black);margin:0 0 4px;line-height:1.2}
+.sub{font-size:13px;color:var(--dark);margin:0}
+
+.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0 16px;border-bottom:2px solid var(--grey);padding-bottom:12px}
+.toolbar h2{font-size:20px;margin:0;color:var(--black)}
+.tbtn{font:inherit;font-size:12px;font-weight:600;background:var(--light);border:none;border-radius:0 8px 0 0;padding:6px 12px;cursor:pointer;color:var(--xdark);margin-left:6px}
+.tbtn:hover{background:var(--grey)}
+
+.label{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--dark);margin:0 0 8px}
+
+/* Model cards */
+.models{display:grid;gap:14px;margin-bottom:24px}
+.mcard{border:1px solid var(--grey);border-left:6px solid var(--red);border-radius:0 14px 0 0;padding:12px 16px}
+.mcard .mn{font-size:18px;font-weight:700;color:var(--black)}
+.mcard .mmeta{font-size:13px;color:var(--dark);margin:2px 0 6px}
+
+/* Tables */
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-bottom:6px;table-layout:fixed}
+thead th{background:var(--light);color:var(--black);font-weight:700;text-align:left;padding:9px 12px;border-bottom:2px solid var(--grey)}
+tbody td{padding:8px 12px;border-bottom:1px solid var(--grey);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+td.spec{font-weight:600;color:var(--black)}
+td.v{font-variant-numeric:tabular-nums}
+td.best{font-weight:700;color:var(--black)}
+td.miss{color:var(--med)}
+sup{font-size:10px;color:var(--dark);margin-left:2px}
+
+/* Sections */
+details.sec{border-top:1px solid var(--light);padding-top:4px;margin-top:8px}
+details.sec>summary{list-style:none;cursor:pointer;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--black);padding:10px 0 8px}
+details.sec>summary::-webkit-details-marker{display:none}
+details.sec>summary::after{content:" +";color:var(--red)}
+details.sec[open]>summary::after{content:" \2212"}
+details.sec>summary .sc{font-weight:600;color:var(--dark);letter-spacing:0;text-transform:none}
+
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:1px 7px;border-radius:3px;white-space:nowrap}
+.b-ok{background:var(--green-t);color:var(--green)}
+.b-low{background:var(--red-t);color:var(--red)}
+.b-eq{background:var(--light);color:var(--dark)}
+.note{background:var(--light);border-radius:0 14px 0 0;padding:14px 18px;margin:8px 0 16px;font-size:13px}
+.empty{background:var(--light);border-radius:0 14px 0 0;padding:20px;color:var(--dark);font-weight:600}
+ul.tight{margin:4px 0;padding-left:20px;font-size:13px}
+ul.tight li{margin-bottom:4px}
+.muted{color:var(--dark);font-size:13px}
+.foot{margin-top:40px;border-top:4px solid var(--red);padding-top:8px;font-size:12px;color:var(--med)}
+
+@media print{
+  .tbtns{display:none}
+  .page{padding:0;max-width:none}
+  details.sec{break-inside:avoid}
+  details.sec:not([open])>*:not(summary){display:block}
+}
+@media (max-width:600px){
+  .page{padding:20px 16px 48px}
+  h1{font-size:22px}
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="hdr">
+    <p class="eyebrow">FortiGate Head-to-Head</p>
+    <h1 id="title">Side-by-Side Comparison</h1>
+    <p class="sub" id="subtitle">Loading datasheet data...</p>
+  </header>
+  <main id="main"></main>
+  <p class="foot" id="foot"></p>
+</div>
+
+<!-- ===================== DATA: THE ONLY PART THE AGENT FILLS IN =====================
+  "models":  2 to 4 model_id values from ds-grabber data/index.json, in display order.
+             The page fetches each model's record from GitHub when it opens.
+  "records": optional. Full model records (data/models/<id>.json) to embed a snapshot
+             that works offline. When present, "models" is ignored.
+-->
+<script id="compare-data" type="application/json">{"models": ["FG-90G", "FG-120G"], "records": []}</script>
+<!-- ================================================================================= -->
+
+<script>
+(function(){
+  var DATA_BASE = "https://raw.githubusercontent.com/jclark1978/ds-grabber/main/";
+
+  // [field, label, kind, direction] direction: 1 higher is better, -1 lower is better, 0 none
+  var SECTIONS = [
+    ["Threat Protection Performance", [
+      ["threat_protection_throughput_mbps","Threat Protection Throughput","mbps",1],
+      ["ngfw_throughput_mbps","NGFW Throughput","mbps",1],
+      ["ips_throughput_mbps","IPS Throughput","mbps",1],
+      ["ssl_inspection_throughput_mbps","SSL Inspection Throughput","mbps",1],
+      ["ssl_inspection_cps","SSL Inspection CPS","count",1],
+      ["ssl_inspection_sessions","SSL Inspection Concurrent Sessions","count",1],
+      ["app_control_throughput_mbps","Application Control Throughput","mbps",1]]],
+    ["Firewall Performance and Capacity", [
+      ["fw_throughput_1518_mbps","Firewall Throughput (1518 byte UDP)","mbps",1],
+      ["fw_throughput_512_mbps","Firewall Throughput (512 byte UDP)","mbps",1],
+      ["fw_throughput_64_mbps","Firewall Throughput (64 byte UDP)","mbps",1],
+      ["fw_latency_us","Firewall Latency (64 byte UDP)","us",-1],
+      ["fw_pps","Firewall Throughput (Packets per Second)","pps",1],
+      ["concurrent_sessions","Concurrent Sessions (TCP)","count",1],
+      ["new_sessions_per_sec","New Sessions per Second (TCP)","count",1],
+      ["firewall_policies","Firewall Policies","count",1]]],
+    ["VPN", [
+      ["ipsec_throughput_mbps","IPsec VPN Throughput (512 byte)","mbps",1],
+      ["ipsec_tunnels_g2g","Gateway-to-Gateway IPsec Tunnels","count",1],
+      ["ipsec_tunnels_c2g","Client-to-Gateway IPsec Tunnels","count",1],
+      ["ssl_vpn_throughput_mbps","SSL VPN Throughput","mbps",1],
+      ["ssl_vpn_users","Concurrent SSL VPN Users","count",1]]],
+    ["Scale and Management", [
+      ["vdoms_default","Virtual Domains (Default)","count",1],
+      ["vdoms_max","Virtual Domains (Maximum)","count",1],
+      ["max_fortiswitches","Maximum FortiSwitches","count",1],
+      ["max_fortiaps_total","Maximum FortiAPs (Total)","count",1],
+      ["max_fortiaps_tunnel","Maximum FortiAPs (Tunnel Mode)","count",1],
+      ["max_fortitokens","Maximum FortiTokens","count",1],
+      ["max_registered_endpoints","Maximum Registered Endpoints","count",1],
+      ["capwap_throughput_mbps","CAPWAP Throughput","mbps",1],
+      ["ha_modes","High Availability","list",0]]]
+  ];
+  var HW_ROWS = [["interfaces","Interfaces"],["storage","Storage"],["rack_units","Rack Units"],
+    ["desktop","Desktop Form Factor"],["power_avg_w","Power (Average, W)"],["power_max_w","Power (Maximum, W)"],
+    ["heat_btu_h","Heat Dissipation (BTU/h)"],["redundant_psu","Redundant Power Supplies"],
+    ["weight_kg","Weight (kg)"],["tpm","Trusted Platform Module"],["ble","Bluetooth Low Energy"]];
+  var VM_ROWS = [["vcpu_min","vCPU (Minimum)"],["vcpu_max","vCPU (Maximum)"],["vm_storage","Storage Support"],["unlimited_users","Unlimited User License"]];
+
+  function esc(s){ return (s==null?'':String(s)).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function num(v,d){ return Number(v).toLocaleString('en-US',{maximumFractionDigits:d==null?2:d}); }
+  function fmt(v,kind){
+    if(v===null||v===undefined) return null;
+    if(kind==='mbps') return v>=1000 ? num(v/1000)+' Gbps' : num(v)+' Mbps';
+    if(kind==='us') return num(v)+' μs';
+    if(kind==='pps') return v>=1e6 ? num(v/1e6)+' Mpps' : num(v)+' pps';
+    if(kind==='list') return Array.isArray(v)? v.join(', ') : String(v);
+    if(typeof v==='boolean') return v?'Yes':'No';
+    if(typeof v==='number') return num(v);
+    return String(v);
+  }
+  function isNoneText(t){ return /^\s*[—–-]?\s*(n\/?a|n\.a\.|none|not supported)?\s*$/i.test(t||''); }
+
+  function getJSON(url){ return fetch(url).then(function(r){ if(!r.ok) throw new Error('Could not load '+url+' ('+r.status+')'); return r.json(); }); }
+
+  function load(){
+    var cfg = JSON.parse(document.getElementById('compare-data').textContent||'{}');
+    if(cfg.records && cfg.records.length) return Promise.resolve({models:cfg.records, live:false});
+    var q = new URLSearchParams(location.search).get('models');
+    var ids = q ? q.split(',').map(function(s){return s.trim();}).filter(Boolean) : (cfg.models||[]);
+    if(!ids.length) return Promise.reject(new Error('No models listed in the compare-data block.'));
+    return getJSON(DATA_BASE+'data/index.json').then(function(index){
+      return Promise.all(ids.map(function(id){
+        var hit = index.models.filter(function(m){ return m.model_id.toUpperCase()===id.toUpperCase(); })[0];
+        if(!hit) throw new Error('Model not found in the datasheet index: '+id);
+        return getJSON(DATA_BASE+hit.file);
+      }));
+    }).then(function(models){ return {models:models, live:true}; });
+  }
+
+  function cell(m,key,kind){
+    var s=(m.specs||{})[key];
+    if(!s) return {html:'Not listed',cls:'miss',v:null};
+    var t=fmt(s.value,kind);
+    if(t===null) t = /tba|tbd/i.test(s.raw||'') ? 'TBA' : (isNoneText(s.raw) ? 'Not supported / N/A' : s.raw);
+    var sup=(s.notes||[]).length ? '<sup>'+esc(s.notes.join(','))+'</sup>' : '';
+    return {html:esc(t)+sup, cls:'v', v: typeof s.value==='number'? s.value : null};
+  }
+  function delta(a,b,dir){
+    if(a===null||b===null||!dir||a===0) return '';
+    if(a===b) return '<span class="badge b-eq">Same</span>';
+    var p=(b-a)/a*100, shown=Math.abs(p)<1? p.toFixed(1) : Math.round(p);
+    var better=(b>a)===(dir>0);
+    return '<span class="badge '+(better?'b-ok':'b-low')+'">'+(b>a?'+':'')+shown+'%</span>';
+  }
+  function colgroup(n,two){
+    var spec=28, dw=two?13:0, w=(100-spec-dw)/n, h='<colgroup><col style="width:'+spec+'%">';
+    for(var i=0;i<n;i++) h+='<col style="width:'+w+'%">';
+    return h+(two?'<col style="width:'+dw+'%">':'')+'</colgroup>';
+  }
+  function head(models){
+    var two=models.length===2;
+    return colgroup(models.length,two)+'<thead><tr><th>Specification</th>'+models.map(function(m){return '<th>'+esc(m.model)+'</th>';}).join('')+
+      (two?'<th>'+esc(short(models[1]))+' vs '+esc(short(models[0]))+'</th>':'')+'</tr></thead>';
+  }
+  function short(m){ return m.model.replace(/^FortiGate\s+/,''); }
+
+  function specRows(models,rows){
+    var two=models.length===2, out='';
+    rows.forEach(function(r){
+      var key=r[0], label=r[1], kind=r[2], dir=r[3];
+      if(!models.some(function(m){return (m.specs||{})[key];})) return;
+      var cells=models.map(function(m){return cell(m,key,kind);});
+      var vals=cells.map(function(c){return c.v;}).filter(function(v){return v!==null;});
+      var uniq=vals.filter(function(v,i){return vals.indexOf(v)===i;});
+      var best=(dir&&vals.length>1&&uniq.length>1)? (dir>0?Math.max.apply(null,vals):Math.min.apply(null,vals)) : null;
+      out+='<tr><td class="spec">'+esc(label)+'</td>'+cells.map(function(c){return '<td class="'+c.cls+(best!==null&&c.v===best?' best':'')+'">'+c.html+'</td>';}).join('')+
+        (two?'<td>'+delta(cells[0].v,cells[1].v,dir)+'</td>':'')+'</tr>';
+    });
+    return out;
+  }
+  function blockRows(models,rows,block){
+    var out='';
+    rows.forEach(function(r){
+      var key=r[0], label=r[1];
+      if(!models.some(function(m){return m[block]&&m[block][key]!=null;})) return;
+      out+='<tr><td class="spec">'+esc(label)+'</td>'+models.map(function(m){
+        var v=m[block]?m[block][key]:null;
+        if(v==null) return '<td class="miss">Not listed</td>';
+        if(key==='interfaces'){
+          var items=v.filter(function(i){return i.count;}).map(function(i){return esc(i.raw)+' × '+esc(i.type);});
+          return '<td class="v">'+(items.join('<br>')||'None listed')+'</td>';
+        }
+        var t=fmt(v);
+        return '<td class="v">'+esc(/^[—–-]$/.test(t)?'None':t)+'</td>';
+      }).join('')+(models.length===2?'<td></td>':'')+'</tr>';
+    });
+    return out;
+  }
+  function section(title,rowsHtml,count,models){
+    if(!rowsHtml) return '';
+    return '<details class="sec" open><summary>'+esc(title)+' <span class="sc">('+count+')</span></summary>'+
+      '<div class="tw"><table>'+head(models)+'<tbody>'+rowsHtml+'</tbody></table></div></details>';
+  }
+  function countRows(h){ return (h.match(/<tr>/g)||[]).length; }
+
+  function render(res){
+    var models=res.models;
+    var names=models.map(function(m){return m.model;});
+    document.title=names.join(' vs ')+' | FortiGate Head-to-Head';
+    document.getElementById('title').textContent=names.join(' vs ');
+    document.getElementById('subtitle').textContent='Specifications from Fortinet datasheets. All performance values are "up to" and vary with system configuration.';
+
+    var h='<div class="toolbar"><h2>Side-by-Side</h2><span class="tbtns">'+
+      '<button class="tbtn" data-x="open">Expand all</button><button class="tbtn" data-x="close">Collapse all</button>'+
+      '<button class="tbtn" data-x="csv">Export CSV</button><button class="tbtn" data-x="print">Print / Save PDF</button></span></div>';
+
+    h+='<div class="models" style="grid-template-columns:repeat('+models.length+',1fr)">'+models.map(function(m){
+      var url=m.source.spec_url||m.source.url;
+      return '<div class="mcard"><div class="mn">'+esc(m.model)+'</div>'+
+        '<div class="mmeta">'+(m.form_factor==='vm'?'Virtual appliance':'Hardware appliance')+' · '+esc(m.model_id)+'</div>'+
+        '<a class="ext" href="'+esc(url)+'" target="_blank" rel="noopener">Datasheet spec page</a>'+
+        (m.source.library_last_updated?'<div class="muted">Fortinet library date '+esc(m.source.library_last_updated)+'</div>':'')+'</div>';
+    }).join('')+'</div>';
+
+    var hasVM=models.some(function(m){return m.form_factor==='vm';}), hasHW=models.some(function(m){return m.form_factor!=='vm';});
+    if(hasVM&&hasHW) h+='<div class="note">The FortiGate VM datasheet lists capacity only, not throughput. VM throughput depends on the hypervisor or cloud instance; see the per-platform VM datasheets.</div>';
+
+    SECTIONS.forEach(function(s){ var r=specRows(models,s[1]); h+=section(s[0],r,countRows(r),models); });
+    var hw=blockRows(models,HW_ROWS,'hardware'); h+=section('Hardware',hw,countRows(hw),models);
+    var vm=blockRows(models,VM_ROWS,'vm'); h+=section('Virtual Appliance',vm,countRows(vm),models);
+
+    var notes='';
+    models.forEach(function(m){
+      var fn=m.footnotes||{}, keys=Object.keys(fn).filter(function(k){return k!=='note';});
+      notes+='<p class="label" style="margin-top:12px">'+esc(m.model)+'</p>'+
+        '<div class="muted"><a class="ext" href="'+esc(m.source.spec_url||m.source.url)+'" target="_blank" rel="noopener">'+esc(m.source.title||'Datasheet')+'</a></div>'+
+        (fn.note?'<div class="muted">'+esc(fn.note)+'</div>':'')+
+        (keys.length?'<ul class="tight">'+keys.map(function(k){return '<li><b>'+esc(k)+'</b> '+esc(fn[k])+'</li>';}).join('')+'</ul>':'');
+    });
+    h+='<details class="sec" open><summary>Test Conditions and Sources</summary>'+notes+'</details>';
+
+    document.getElementById('main').innerHTML=h;
+    var now=new Date();
+    document.getElementById('foot').textContent='FortiGate Head-to-Head · Template v1.0 · '+(res.live?'Data loaded live from ds-grabber':'Embedded data snapshot')+' · Generated '+now.toISOString().slice(0,16).replace('T',' ');
+    window.__models=models;
+  }
+
+  function exportCsv(){
+    var models=window.__models||[], rows=[['Specification'].concat(models.map(function(m){return m.model;}))];
+    SECTIONS.forEach(function(s){ s[1].forEach(function(r){
+      if(!models.some(function(m){return (m.specs||{})[r[0]];})) return;
+      rows.push([r[1]].concat(models.map(function(m){var x=(m.specs||{})[r[0]]; if(!x) return ''; var t=fmt(x.value,r[2]); return t===null?x.raw:t;})));
+    });});
+    rows.push(['Datasheet'].concat(models.map(function(m){return m.source.spec_url||m.source.url;})));
+    var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c==null?'':c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
+    var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='fortigate-head-to-head.csv'; a.click();
+  }
+
+  document.addEventListener('click',function(e){
+    var x=e.target.closest('[data-x]'); if(!x) return;
+    var k=x.getAttribute('data-x');
+    if(k==='print') return window.print();
+    if(k==='csv') return exportCsv();
+    Array.prototype.forEach.call(document.querySelectorAll('details.sec'),function(d){d.open=(k==='open');});
+  });
+
+  load().then(render).catch(function(err){
+    document.getElementById('subtitle').textContent='';
+    document.getElementById('main').innerHTML='<div class="empty">'+esc(err.message)+'</div>';
+  });
+})();
+</script>
+</body>
+</html>

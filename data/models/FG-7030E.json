@@ -1,0 +1,51 @@
+{
+  "model": "FortiGate 7030E",
+  "model_id": "FG-7030E",
+  "form_factor": "appliance",
+  "source": {
+    "title": "FortiGate 7000E Series Data Sheet",
+    "url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_7000_Series_Bundle.pdf",
+    "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/FortiGate_7000_Series_Bundle.pdf#page=8",
+    "file": "FortiGate_7000_Series_Bundle.pdf",
+    "library_last_updated": "2022-08-15",
+    "sha256": "c37fc5783ee3e3e271191f238cef5f3d63da12b1e14cdd850367e2e11c390a32"
+  },
+  "specs": {},
+  "hardware": {
+    "dimensions_mm_raw": "266.7 x 440 x 650",
+    "weight_raw": "134.9 lbs (61.3 kg)",
+    "form_factor": "6 RU",
+    "power_avg_w": 1390.0,
+    "power_max_w": 1940.0,
+    "power_raw": "1940 / 1390 W",
+    "heat_dissipation_raw": "6619 BTU/h",
+    "operating_temp_raw": "32°F to 104°F (0°C to 40°C)",
+    "certifications": "FCC, ICES, CE, RCM, VCCI, BSMI, UL/cUL, CB",
+    "dimensions_mm": {
+      "h": 266.7,
+      "w": 440.0,
+      "l": 650.0
+    },
+    "weight_kg": 61.3,
+    "rack_units": 6,
+    "desktop": false,
+    "heat_btu_h": 6619,
+    "operating_temp_c": {
+      "min": 0,
+      "max": 40
+    }
+  },
+  "vm": null,
+  "footnotes": {
+    "note": "\u0007All performance values are “up to” and vary depending on system configuration. IPsec VPN performance is based on 512 byte UDP packets using AES-256+SHA1. 1. IPS performance is measured using 1 Mbyte HTTP and Enterprise Traffic Mix. 2. SSL Inspection is measured with IPS enabled and HTTP traffic, using TLS v1.2 with AES256-SHA. 3. Application Control performance is measured with 64 Kbytes HTTP traffic. 4. NGFW performance is measured with IPS and Application Control enabled, based on Enterprise Traffic Mix. 5. Threat Protection performance is measured with IPS and Application Control and Malware protection enabled, based on Enterprise Traffic Mix. For complete, up-to-date and detailed feature set, please refer to the Administration Handbook and FortiOS Datasheet. NP6 CP9 Power and Environment FG-7620E Power Consumption (Average/Maximum) 320 / 410 W Heat Dissipation (Average) 1395 BTU/h Operating Temperature 32°F to 104°F (0°C to 40°C) Storage Temperature -31°F to 158°F (-35°C to 70°C) Humidity 20% to 90% non-condensing Compliance Certifications FCC, ICES, CE, RCM, VCCI, BSMI, UL/cUL, CB"
+  },
+  "other": {
+    "Height x Width x Length (inches)": "10.5 x 17.3 x 25.6",
+    "Power Required": "AC (configured with 3 PSUs in a 2+1 redundant configuration, an additional PSU can be added for additional redundancy)",
+    "AC Current (Maximum)": "12A@100V, 10A@240V",
+    "DC Power Supply": "–",
+    "DC Current (Maximum)": "–",
+    "Storage Temperature": "-31°F to 158°F (-35°C to 70°C)",
+    "Humidity": "20% to 90% non-condensing"
+  }
+}

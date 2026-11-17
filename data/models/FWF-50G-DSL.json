@@ -1,0 +1,285 @@
+{
+  "model": "FortiWiFi 50G-DSL",
+  "model_id": "FWF-50G-DSL",
+  "form_factor": "appliance",
+  "source": {
+    "title": "FortiGate FortiWiFi 50G Series Data Sheet",
+    "url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-50g-series.pdf",
+    "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-50g-series.pdf#page=12",
+    "file": "fortigate-fortiwifi-50g-series.pdf",
+    "library_last_updated": null,
+    "sha256": "256510d411ea96e9a5c3e1f1ca85546a5eadc16722c1bdc42a424c385bcc6808"
+  },
+  "specs": {
+    "ips_throughput_mbps": {
+      "value": 2250,
+      "raw": "2.25 Gbps",
+      "label": "IPS Throughput",
+      "notes": [
+        "2"
+      ]
+    },
+    "ngfw_throughput_mbps": {
+      "value": 1250,
+      "raw": "1.25 Gbps",
+      "label": "NGFW Throughput",
+      "notes": [
+        "2",
+        "4"
+      ]
+    },
+    "threat_protection_throughput_mbps": {
+      "value": 1100,
+      "raw": "1.1 Gbps",
+      "label": "Threat Protection Throughput",
+      "notes": [
+        "2",
+        "5"
+      ]
+    },
+    "fw_throughput_1518_mbps": {
+      "value": 5000,
+      "raw": "5 / 5 / 4 Gbps",
+      "label": "Firewall Throughput (1518/512/64 byte UDP packets)"
+    },
+    "fw_throughput_512_mbps": {
+      "value": 5000,
+      "raw": "5 / 5 / 4 Gbps",
+      "label": "Firewall Throughput (1518/512/64 byte UDP packets)"
+    },
+    "fw_throughput_64_mbps": {
+      "value": 4000,
+      "raw": "5 / 5 / 4 Gbps",
+      "label": "Firewall Throughput (1518/512/64 byte UDP packets)"
+    },
+    "fw_latency_us": {
+      "value": 2.42,
+      "raw": "2.42 μs",
+      "label": "Firewall Latency (64 byte UDP packets)"
+    },
+    "fw_pps": {
+      "value": 6000000,
+      "raw": "6 Mpps",
+      "label": "Firewall Throughput (Packets Per Second)"
+    },
+    "concurrent_sessions": {
+      "value": 720000,
+      "raw": "720 000",
+      "label": "Concurrent Sessions (TCP)"
+    },
+    "new_sessions_per_sec": {
+      "value": 85000,
+      "raw": "85 000",
+      "label": "New Sessions/Second (TCP)"
+    },
+    "firewall_policies": {
+      "value": 2000,
+      "raw": "2000",
+      "label": "Firewall Policies"
+    },
+    "ipsec_throughput_mbps": {
+      "value": 4500,
+      "raw": "4.5 Gbps",
+      "label": "IPsec VPN Throughput (512 byte)",
+      "notes": [
+        "1"
+      ]
+    },
+    "ipsec_tunnels_g2g": {
+      "value": 200,
+      "raw": "200",
+      "label": "Gateway-to-Gateway IPsec VPN Tunnels"
+    },
+    "ipsec_tunnels_c2g": {
+      "value": 250,
+      "raw": "250",
+      "label": "Client-to-Gateway IPsec VPN Tunnels"
+    },
+    "ssl_vpn_throughput_mbps": {
+      "value": null,
+      "raw": "—",
+      "label": "SSL-VPN Throughput"
+    },
+    "ssl_vpn_users": {
+      "value": null,
+      "raw": "—",
+      "label": "Concurrent SSL-VPN Users (Recommended Maximum, Tunnel Mode)"
+    },
+    "ssl_inspection_throughput_mbps": {
+      "value": 1300,
+      "raw": "1.3 Gbps",
+      "label": "SSL Inspection Throughput (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "ssl_inspection_cps": {
+      "value": 699,
+      "raw": "699",
+      "label": "SSL Inspection CPS (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "ssl_inspection_sessions": {
+      "value": 74000,
+      "raw": "74 000",
+      "label": "SSL Inspection Concurrent Session (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "app_control_throughput_mbps": {
+      "value": 2800,
+      "raw": "2.8 Gbps",
+      "label": "Application Control Throughput (HTTP 64K)",
+      "notes": [
+        "2"
+      ]
+    },
+    "capwap_throughput_mbps": {
+      "value": 3800,
+      "raw": "3.8 Gbps",
+      "label": "CAPWAP Throughput (HTTP 64K)"
+    },
+    "vdoms_default": {
+      "value": 5,
+      "raw": "5/5",
+      "label": "Virtual Domains (Default/ Maximum)"
+    },
+    "vdoms_max": {
+      "value": 5,
+      "raw": "5/5",
+      "label": "Virtual Domains (Default/ Maximum)"
+    },
+    "max_fortiswitches": {
+      "value": 8,
+      "raw": "8",
+      "label": "Maximum Number of FortiSwitches Supported"
+    },
+    "max_fortiaps_total": {
+      "value": 16,
+      "raw": "16 / 8",
+      "label": "Maximum Number of FortiAPs (Total/Tunnel Mode)"
+    },
+    "max_fortiaps_tunnel": {
+      "value": 8,
+      "raw": "16 / 8",
+      "label": "Maximum Number of FortiAPs (Total/Tunnel Mode)"
+    },
+    "max_fortitokens": {
+      "value": 500,
+      "raw": "500",
+      "label": "Maximum Number of FortiTokens"
+    },
+    "ha_modes": {
+      "value": [
+        "Active-Active",
+        "Active-Passive",
+        "Clustering"
+      ],
+      "raw": "Active-Active, Active-Passive, Clustering",
+      "label": "High Availability Configurations"
+    }
+  },
+  "hardware": {
+    "interfaces": [
+      {
+        "type": "Hardware Accelerated GE WAN Ports",
+        "count": 1,
+        "raw": "1"
+      },
+      {
+        "type": "Hardware Accelerated GE RJ45 Ports",
+        "count": 3,
+        "raw": "3"
+      },
+      {
+        "type": "Hardware Accelerated GE RJ45 FortiLink Ports (Default)",
+        "count": 1,
+        "raw": "1"
+      },
+      {
+        "type": "DSL RJ11 Port",
+        "count": 1,
+        "raw": "1"
+      },
+      {
+        "type": "USB Port",
+        "count": 1,
+        "raw": "1"
+      },
+      {
+        "type": "Console Port (RJ45)",
+        "count": 1,
+        "raw": "1"
+      },
+      {
+        "type": "Antenna Ports (SMA)",
+        "count": 3,
+        "raw": "3"
+      },
+      {
+        "type": "Wireless Interface",
+        "count": 2.4,
+        "raw": "Dual Radio (2.4 GHz/ 5 GHz), 802.11 a/b/g/n/ac/ax"
+      }
+    ],
+    "storage": "—",
+    "tpm": true,
+    "ble": true,
+    "dimensions_mm_raw": "42 x 216 x 178",
+    "weight_raw": "2.2 lbs (1.0 kg)",
+    "form_factor": "Desktop",
+    "power_avg_w": 17.74,
+    "power_max_w": 19.0,
+    "power_raw": "17.74 W / 19.0 W",
+    "heat_dissipation_raw": "64.79 BTU/h",
+    "operating_temp_raw": "32°F to 104°F (0°C to 40°C)",
+    "noise_level": "Fanless 0 dBA",
+    "compliance": "FCC, ISED, CE, UL/cUL, CB",
+    "certifications": "USGv6/IPv6",
+    "dimensions_mm": {
+      "h": 42.0,
+      "w": 216.0,
+      "l": 178.0
+    },
+    "weight_kg": 1.0,
+    "rack_units": null,
+    "desktop": true,
+    "heat_btu_h": 64.79,
+    "operating_temp_c": {
+      "min": 0,
+      "max": 40
+    }
+  },
+  "vm": null,
+  "footnotes": {
+    "note": "All performance values are “up to” and vary depending on system configuration.",
+    "1": "IPsec VPN performance test uses AES256-SHA256.",
+    "2": "IPS (Enterprise Mix), Application Control, NGFW and Threat Protection are measured with Logging enabled.",
+    "3": "SSL Inspection performance values use an average of HTTPS sessions of different cipher suites.",
+    "4": "NGFW performance is measured with Firewall, IPS and Application Control enabled.",
+    "5": "Threat Protection performance is measured with Firewall, IPS, Application Control and Malware Protection enabled."
+  },
+  "other": {
+    "Signed Firmware Hardware Switch": "✓",
+    "Height x Width x Length (inches)": "1.7 x 8.5 x 7.0",
+    "Power Rating": "12VDC, 3A",
+    "Power Required": "Powered by External DC Power Adapter, 100–240V AC, 50/60 Hz",
+    "Maximum Current": "100V/0.3A, 240V/0.15A",
+    "Storage Temperature": "-31°F to 158°F (-35°C to 70°C)",
+    "Humidity": "10% to 90% non-condensing",
+    "Operating Altitude": "Up to 10 000 ft (3048 m)",
+    "vDSL2": "✓",
+    "ADSL2": "✓",
+    "ADSL2+": "✓",
+    "G.DMT": "✓",
+    "T1.413": "✓",
+    "G.Lite": "✓",
+    "Annex A, B, I, J, M, L": "✓",
+    "Multiple User (MU) MIMO": "2 x 2",
+    "Maximum Wi-Fi Speeds": "1201 Mbps @ 5 GHz, 574 Mbps @ 2.4 GHz",
+    "Maximum Tx Power": "21.0 dBm per chain @ 2.4GHz, 19.5 dBm per chain @ 5GHz 15"
+  }
+}

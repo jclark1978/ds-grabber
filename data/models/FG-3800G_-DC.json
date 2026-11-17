@@ -1,0 +1,292 @@
+{
+  "model": "FortiGate 3800G/-DC",
+  "model_id": "FG-3800G/-DC",
+  "form_factor": "appliance",
+  "source": {
+    "title": "FortiGate 3800G Series Data Sheet",
+    "url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-3800g-series.pdf",
+    "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-3800g-series.pdf#page=8",
+    "file": "fortigate-3800g-series.pdf",
+    "library_last_updated": null,
+    "sha256": "e14112ebf1fe486d16817103a767c329bb39b4314c88fa247308f2982d37783c"
+  },
+  "specs": {
+    "ips_throughput_mbps": {
+      "value": 250000,
+      "raw": "250 Gbps",
+      "label": "IPS Throughput",
+      "notes": [
+        "2"
+      ]
+    },
+    "ngfw_throughput_mbps": {
+      "value": 210000,
+      "raw": "210 Gbps",
+      "label": "NGFW Throughput",
+      "notes": [
+        "2",
+        "4"
+      ]
+    },
+    "threat_protection_throughput_mbps": {
+      "value": 200000,
+      "raw": "200 Gbps",
+      "label": "Threat Protection Throughput",
+      "notes": [
+        "2",
+        "5"
+      ]
+    },
+    "fw_throughput_1518_mbps": {
+      "value": 795000,
+      "raw": "795 / 793 / 453 Gbps",
+      "label": "IPv4 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_throughput_512_mbps": {
+      "value": 793000,
+      "raw": "795 / 793 / 453 Gbps",
+      "label": "IPv4 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_throughput_64_mbps": {
+      "value": 453000,
+      "raw": "795 / 793 / 453 Gbps",
+      "label": "IPv4 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_ipv6_throughput_1518_mbps": {
+      "value": 795000,
+      "raw": "795 / 793 / 453 Gbps",
+      "label": "IPv6 Firewall Throughput (1518 / 512 / 86 byte, UDP)"
+    },
+    "fw_ipv6_throughput_512_mbps": {
+      "value": 793000,
+      "raw": "795 / 793 / 453 Gbps",
+      "label": "IPv6 Firewall Throughput (1518 / 512 / 86 byte, UDP)"
+    },
+    "fw_ipv6_throughput_small_mbps": {
+      "value": 453000,
+      "raw": "795 / 793 / 453 Gbps",
+      "label": "IPv6 Firewall Throughput (1518 / 512 / 86 byte, UDP)"
+    },
+    "fw_latency_us": {
+      "value": 3.53,
+      "raw": "3.53 μs",
+      "label": "Firewall Latency (64 byte, UDP)"
+    },
+    "fw_pps": {
+      "value": 679500000,
+      "raw": "679.5 Mpps",
+      "label": "Firewall Throughput (Packet per Second)"
+    },
+    "concurrent_sessions": {
+      "value": 200000000,
+      "raw": "200 Million / 450 Million*",
+      "label": "Concurrent Sessions (TCP)"
+    },
+    "new_sessions_per_sec": {
+      "value": 1110000,
+      "raw": "1.11 Million / 7 Million*",
+      "label": "New Sessions/Second (TCP)"
+    },
+    "firewall_policies": {
+      "value": 400000,
+      "raw": "400 000",
+      "label": "Firewall Policies"
+    },
+    "ipsec_throughput_mbps": {
+      "value": 210000,
+      "raw": "210 Gbps",
+      "label": "IPsec VPN Throughput (512 byte)",
+      "notes": [
+        "1"
+      ]
+    },
+    "ipsec_tunnels_g2g": {
+      "value": 40000,
+      "raw": "40 000",
+      "label": "Gateway-to-Gateway IPsec VPN Tunnels"
+    },
+    "ipsec_tunnels_c2g": {
+      "value": 200000,
+      "raw": "200 000",
+      "label": "Client-to-Gateway IPsec VPN Tunnels"
+    },
+    "ssl_vpn_throughput_mbps": {
+      "value": 27000,
+      "raw": "27 Gbps",
+      "label": "SSL-VPN Throughput"
+    },
+    "ssl_vpn_users": {
+      "value": 30000,
+      "raw": "30 000",
+      "label": "Concurrent SSL-VPN Users (Recommended Maximum, Tunnel Mode)"
+    },
+    "ssl_inspection_throughput_mbps": {
+      "value": 120000,
+      "raw": "120 Gbps",
+      "label": "SSL Inspection Throughput (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "ssl_inspection_cps": {
+      "value": 114000,
+      "raw": "114 000",
+      "label": "SSL Inspection CPS (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "ssl_inspection_sessions": {
+      "value": 18000000,
+      "raw": "18 Million",
+      "label": "SSL Inspection Concurrent Session (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "app_control_throughput_mbps": {
+      "value": 315000,
+      "raw": "315 Gbps",
+      "label": "Application Control Throughput (HTTP 64K)",
+      "notes": [
+        "2"
+      ]
+    },
+    "capwap_throughput_mbps": {
+      "value": null,
+      "raw": "TBA",
+      "label": "CAPWAP Throughput (HTTP 64K)"
+    },
+    "vdoms_default": {
+      "value": 10,
+      "raw": "10 / 500",
+      "label": "Virtual Domains (Default / Maximum)"
+    },
+    "vdoms_max": {
+      "value": 500,
+      "raw": "10 / 500",
+      "label": "Virtual Domains (Default / Maximum)"
+    },
+    "max_fortiswitches": {
+      "value": 300,
+      "raw": "300",
+      "label": "Maximum Number of FortiSwitches Supported"
+    },
+    "max_fortiaps_total": {
+      "value": 8192,
+      "raw": "8192 / 4096",
+      "label": "Maximum Number of FortiAPs (Total / Tunnel)"
+    },
+    "max_fortiaps_tunnel": {
+      "value": 4096,
+      "raw": "8192 / 4096",
+      "label": "Maximum Number of FortiAPs (Total / Tunnel)"
+    },
+    "max_fortitokens": {
+      "value": 20000,
+      "raw": "20 000",
+      "label": "Maximum Number of FortiTokens"
+    },
+    "max_registered_endpoints": {
+      "value": 50000,
+      "raw": "50 000",
+      "label": "Maximum Number of FortiClients"
+    },
+    "ha_modes": {
+      "value": [
+        "Active-Active",
+        "Active-Passive",
+        "Clustering"
+      ],
+      "raw": "Active-Active, Active-Passive, Clustering",
+      "label": "High Availability Configurations"
+    }
+  },
+  "hardware": {
+    "interfaces": [
+      {
+        "type": "Hardware Accelerated 400GE QSFP-DD/ 200GE QSFP56/ 100GE QSFP28/ 40GE QSFP+ Ports",
+        "count": 4,
+        "raw": "4"
+      },
+      {
+        "type": "Hardware Accelerated 200GE QSFP56/ 100GE QSFP28/ 40GE QSFP+ Slots",
+        "count": 6,
+        "raw": "6"
+      },
+      {
+        "type": "Hardware Accelerated 50GE SFP56/ 25 GE SFP28/ 10 GE SFP+/ GE SFP Slots",
+        "count": 18,
+        "raw": "18"
+      },
+      {
+        "type": "10GE/ GE RJ45 Management Ports",
+        "count": 2,
+        "raw": "2"
+      },
+      {
+        "type": "USB Port",
+        "count": 1,
+        "raw": "1"
+      },
+      {
+        "type": "Console Port",
+        "count": 1,
+        "raw": "1"
+      }
+    ],
+    "storage": "0",
+    "tpm": true,
+    "ble": null,
+    "included_transceivers": "2x SFP56 (SR 10 GE)",
+    "dimensions_mm_raw": "132.5 x 437 x 663.7",
+    "weight_raw": "71.65 lbs (32.5 kg)",
+    "form_factor": "Rack Mount, 3 RU",
+    "power_avg_w": 1496.0,
+    "power_max_w": 1950.0,
+    "power_raw": "1496 W / 1950 W",
+    "heat_dissipation_raw": "6654 BTU/h",
+    "redundant_psu": false,
+    "operating_temp_raw": "32°F to 104°F (0°C to 40°C)",
+    "noise_level": "70.4 dBA",
+    "airflow": "Front to Back",
+    "compliance": "TBA",
+    "certifications": "USGv6/IPv6",
+    "dimensions_mm": {
+      "h": 132.5,
+      "w": 437.0,
+      "l": 663.7
+    },
+    "weight_kg": 32.5,
+    "rack_units": 3,
+    "desktop": false,
+    "heat_btu_h": 6654,
+    "operating_temp_c": {
+      "min": 0,
+      "max": 40
+    }
+  },
+  "vm": null,
+  "footnotes": {
+    "note": "All performance values are “up to” and vary depending on system configuration.",
+    "1": "IPsec VPN performance test uses AES256-SHA256.",
+    "2": "IPS (Enterprise Mix), Application Control, NGFW and Threat Protection are measured with Logging enabled.",
+    "3": "SSL Inspection performance values use an average of HTTPS sessions of different cipher suites.",
+    "4": "NGFW performance is measured with Firewall, IPS and Application Control enabled.",
+    "5": "Threat Protection performance is measured with Firewall, IPS, Application Control and Malware Protection enabled."
+  },
+  "other": {
+    "Signed Firmware Hardware Switch": "✓",
+    "FortiSentry": "✓",
+    "Height x Width x Length (inches)": "5.22 x 17.2 x 26.13",
+    "AC Power Supply": "200–240 VAC, 60/50 Hz",
+    "AC Current (Maximum)": "10A@200-240VAC",
+    "DC Power Supply": "-48VDC to -60VDC, 23A",
+    "DC Current (Maximum)": "12@100V, 9A@240V",
+    "Power Supply Efficiency Rating": "80+ Platinum",
+    "Fan Tray": "Hot Swappable",
+    "Storage Temperature": "-31°F to 158°F (-35°C to 70°C)",
+    "Humidity": "20% to 90% non-condensing",
+    "Operating Altitude": "Up to 10 000 ft (3048 m)"
+  }
+}

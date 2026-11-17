@@ -1,0 +1,305 @@
+{
+  "model": "FortiGate 40F-3G4G",
+  "model_id": "FG-40F-3G4G",
+  "form_factor": "appliance",
+  "source": {
+    "title": "FortiGate 40F Series Data Sheet",
+    "url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-40f-series.pdf",
+    "spec_url": "https://www.fortinet.com/content/dam/fortinet/assets/data-sheets/pdf/fortigate-fortiwifi-40f-series.pdf#page=8",
+    "file": "fortigate-fortiwifi-40f-series.pdf",
+    "library_last_updated": "2024-10-12",
+    "sha256": "91fc18cf3bf10ce6cfde0ae8ae7df4634052790648e0275cfcc441e1f3519148"
+  },
+  "specs": {
+    "ips_throughput_mbps": {
+      "value": 1000,
+      "raw": "1 Gbps",
+      "label": "IPS Throughput",
+      "notes": [
+        "2"
+      ]
+    },
+    "ngfw_throughput_mbps": {
+      "value": 800,
+      "raw": "800 Mbps",
+      "label": "NGFW Throughput",
+      "notes": [
+        "2",
+        "4"
+      ]
+    },
+    "threat_protection_throughput_mbps": {
+      "value": 600,
+      "raw": "600 Mbps",
+      "label": "Threat Protection Throughput",
+      "notes": [
+        "2",
+        "5"
+      ]
+    },
+    "fw_throughput_1518_mbps": {
+      "value": 5000,
+      "raw": "5 / 5 / 5 Gbps",
+      "label": "IPv4 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_throughput_512_mbps": {
+      "value": 5000,
+      "raw": "5 / 5 / 5 Gbps",
+      "label": "IPv4 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_throughput_64_mbps": {
+      "value": 5000,
+      "raw": "5 / 5 / 5 Gbps",
+      "label": "IPv4 Firewall Throughput (1518 / 512 / 64 byte, UDP)"
+    },
+    "fw_latency_us": {
+      "value": 2.97,
+      "raw": "2.97 μs",
+      "label": "Firewall Latency (64 byte, UDP)"
+    },
+    "fw_pps": {
+      "value": 7500000,
+      "raw": "7.5 Mpps",
+      "label": "Firewall Throughput (Packet per Second)"
+    },
+    "concurrent_sessions": {
+      "value": 700000,
+      "raw": "700 000",
+      "label": "Concurrent Sessions (TCP)"
+    },
+    "new_sessions_per_sec": {
+      "value": 35000,
+      "raw": "35 000",
+      "label": "New Sessions/Second (TCP)"
+    },
+    "firewall_policies": {
+      "value": 2000,
+      "raw": "2000",
+      "label": "Firewall Policies"
+    },
+    "ipsec_throughput_mbps": {
+      "value": 4400,
+      "raw": "4.4 Gbps",
+      "label": "IPsec VPN Throughput (512 byte)",
+      "notes": [
+        "1"
+      ]
+    },
+    "ipsec_tunnels_g2g": {
+      "value": 200,
+      "raw": "200",
+      "label": "Gateway-to-Gateway IPsec VPN Tunnels"
+    },
+    "ipsec_tunnels_c2g": {
+      "value": 250,
+      "raw": "250",
+      "label": "Client-to-Gateway IPsec VPN Tunnels"
+    },
+    "ssl_vpn_throughput_mbps": {
+      "value": 490,
+      "raw": "490 Mbps",
+      "label": "SSL-VPN Throughput",
+      "notes": [
+        "6"
+      ]
+    },
+    "ssl_vpn_users": {
+      "value": 200,
+      "raw": "200",
+      "label": "Concurrent SSL-VPN Users (Recommended Maximum, Tunnel Mode)",
+      "notes": [
+        "6"
+      ]
+    },
+    "ssl_inspection_throughput_mbps": {
+      "value": 310,
+      "raw": "310 Mbps",
+      "label": "SSL Inspection Throughput (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "ssl_inspection_cps": {
+      "value": 320,
+      "raw": "320",
+      "label": "SSL Inspection CPS (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "ssl_inspection_sessions": {
+      "value": 55000,
+      "raw": "55 000",
+      "label": "SSL Inspection Concurrent Session (IPS, avg. HTTPS)",
+      "notes": [
+        "3"
+      ]
+    },
+    "app_control_throughput_mbps": {
+      "value": 990,
+      "raw": "990 Mbps",
+      "label": "Application Control Throughput (HTTP 64K)",
+      "notes": [
+        "2"
+      ]
+    },
+    "capwap_throughput_mbps": {
+      "value": 3500,
+      "raw": "3.5 Gbps",
+      "label": "CAPWAP Throughput (HTTP 64K)"
+    },
+    "vdoms_default": {
+      "value": 10,
+      "raw": "10 / 10",
+      "label": "Virtual Domains (Default / Maximum)"
+    },
+    "vdoms_max": {
+      "value": 10,
+      "raw": "10 / 10",
+      "label": "Virtual Domains (Default / Maximum)"
+    },
+    "max_fortiswitches": {
+      "value": 8,
+      "raw": "8",
+      "label": "Maximum Number of FortiSwitches Supported"
+    },
+    "max_fortiaps_total": {
+      "value": 16,
+      "raw": "16 / 8",
+      "label": "Maximum Number of FortiAPs (Total / Tunnel)"
+    },
+    "max_fortiaps_tunnel": {
+      "value": 8,
+      "raw": "16 / 8",
+      "label": "Maximum Number of FortiAPs (Total / Tunnel)"
+    },
+    "max_fortitokens": {
+      "value": 500,
+      "raw": "500",
+      "label": "Maximum Number of FortiTokens"
+    },
+    "ha_modes": {
+      "value": [
+        "Active-Active",
+        "Active-Passive",
+        "Clustering"
+      ],
+      "raw": "Active-Active, Active-Passive, Clustering",
+      "label": "High Availability Configurations"
+    }
+  },
+  "hardware": {
+    "interfaces": [
+      {
+        "type": "Hardware Accelerated GE RJ45 WAN / DMZ Ports",
+        "count": 1,
+        "raw": "1"
+      },
+      {
+        "type": "Hardware Accelerated GE RJ45 Internal Ports",
+        "count": 3,
+        "raw": "3"
+      },
+      {
+        "type": "Hardware Accelerated GE RJ45 FortiLink Ports (Default)",
+        "count": 1,
+        "raw": "1"
+      },
+      {
+        "type": "Hardware Accelerated GE RJ45 PoE/+ Ports",
+        "count": 0,
+        "raw": "0"
+      },
+      {
+        "type": "Wireless Interface",
+        "count": 0,
+        "raw": "0"
+      },
+      {
+        "type": "Antenna Ports (SMA)",
+        "count": 3,
+        "raw": "3"
+      },
+      {
+        "type": "USB Ports",
+        "count": 1,
+        "raw": "1"
+      },
+      {
+        "type": "Console Port (RJ45)",
+        "count": 1,
+        "raw": "1"
+      },
+      {
+        "type": "SIM Slots (Nano SIM)",
+        "count": 2,
+        "raw": "2"
+      }
+    ],
+    "storage": "0",
+    "included_transceivers": "0",
+    "tpm": null,
+    "ble": null,
+    "dimensions_mm_raw": "40.5 x 216 x 160",
+    "weight_raw": "2.2 lbs (1 kg)",
+    "form_factor": "Desktop",
+    "power_avg_w": 15.8,
+    "power_max_w": 18.6,
+    "power_raw": "15.8 W / 18.6 W",
+    "heat_dissipation_raw": "63.5 BTU/h",
+    "operating_temp_raw": "32°F to 104°F (0°C to 40°C)",
+    "noise_level": "Fanless 0 dBA",
+    "compliance": "FCC, ICES, CE, RCM, VCCI, BSMI, UL/cUL, CB",
+    "certifications": "USGv6/IPv6",
+    "dimensions_mm": {
+      "h": 40.5,
+      "w": 216.0,
+      "l": 160.0
+    },
+    "weight_kg": 1.0,
+    "rack_units": null,
+    "desktop": true,
+    "heat_btu_h": 63.5,
+    "operating_temp_c": {
+      "min": 0,
+      "max": 40
+    }
+  },
+  "vm": null,
+  "footnotes": {
+    "note": "All performance values are “up to” and vary depending on system configuration.",
+    "1": "IPsec VPN performance test uses AES256-SHA256.",
+    "2": "IPS (Enterprise Mix), Application Control, NGFW and Threat Protection are measured with Logging enabled.",
+    "3": "SSL Inspection performance values use an average of HTTPS sessions of different cipher suites.",
+    "4": "NGFW performance is measured with Firewall, IPS and Application Control enabled.",
+    "5": "Threat Protection performance is measured with Firewall, IPS, Application Control and Malware Protection enabled.",
+    "6": "SSL VPN not supported on FortiOS 7.6.0 and above."
+  },
+  "other": {
+    "Cellular Modem": "3G4G LTE",
+    "Signed Firmware Hardware Switch": "—",
+    "Height x Width x Length (inches)": "1.6 x 8.5 x 6.3",
+    "Input Rating": "12Vdc, 3A",
+    "Power Required": "Powered by external DC power adapter, 100-240V AC, 50/60 Hz",
+    "Current (Maximum)": "100V AC / 0.3A, 240V AC / 0.2A",
+    "Storage Temperature": "-31°F to 158°F (-35°C to 70°C)",
+    "Humidity": "10% to 90% non-condensing",
+    "Operating Altitude": "Up to 7400 ft (2250 m)",
+    "Multiple (MU) MIMO": "N/A",
+    "Maximum Wi-Fi Speeds": "N/A",
+    "Maximum Tx Power": "20 dBm",
+    "Antenna Gain": "N/A",
+    "Regions": "All Regions",
+    "Modem Model": "Sierra Wireless EM7565 (2 SIM Slots, Active/Passive)",
+    "LTE Category": "CAT-12",
+    "LTE Bands": "B1, B2, B3, B4, B5, B7, B8, B9, B12, B13, B18, B19, B20, B26, B28, B29, B30, B32, B41, B42, B43, B46, B48, B66",
+    "UMTS/HSPA+": "B1, B2, B4, B5, B6, B8, B9, B19",
+    "WCDMA": "—",
+    "CDMA 1xRTT/EV-DO Rev A": "—",
+    "GSM/GPRS/EDGE": "—",
+    "Module Certifications": "FCC, ICES, CE, RCM, VCCI, BSMI, UL/cUL, CB",
+    "Diversity": "Yes",
+    "MIMO": "Yes",
+    "GNSS Bias": "Yes 9"
+  }
+}
